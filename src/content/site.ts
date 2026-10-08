@@ -43,7 +43,7 @@ export const nav = {
       },
     },
     {
-      label: "Trust",
+      label: "Assurance",
       items: [
         { label: "Sources & Verification", href: "/trust/verification", icon: "verification", description: "Every legal answer should lead you back to the law." },
         { label: "Security & Privacy", href: "/trust/security", icon: "security", description: "Designed for the expectations of professional legal work." },
