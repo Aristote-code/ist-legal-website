@@ -81,3 +81,16 @@ export const hero = {
     poster: "/media/hero-poster.jpg",
   },
 };
+
+// Logo strip under the hero (Figma node 6:756).
+// PLACEHOLDER logos from the Figma template — replace with real, approved IST Legal
+// partners/clients before publishing (the brief forbids invented client logos).
+export const logoStrip = {
+  label: "Trusted by legal teams and institutions",
+  logos: [
+    { name: "FeatherDev", src: "/media/logos/featherdev.png", width: 123 },
+    { name: "Spherule", src: "/media/logos/spherule.png", width: 103 },
+    { name: "GlobalBank", src: "/media/logos/globalbank.png", width: 123 },
+    { name: "Nietzsche", src: "/media/logos/nietzsche.png", width: 113 },
+  ],
+};

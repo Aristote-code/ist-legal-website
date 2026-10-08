@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import { LogoStrip } from "@/components/LogoStrip";
 import { Navigation } from "@/components/Navigation";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
       <Navigation />
       <main className="flex-1">
         <Hero />
+        <LogoStrip />
       </main>
     </>
   );
