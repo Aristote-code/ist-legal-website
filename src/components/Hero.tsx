@@ -41,7 +41,7 @@ export function Hero() {
       <div className="absolute inset-0 -z-10 overflow-clip">
         <video
           ref={videoRef}
-          className="pointer-events-none h-full w-full object-cover [filter:brightness(0.72)_saturate(0.85)]"
+          className="pointer-events-none h-full w-full object-cover"
           poster={hero.video.poster}
           autoPlay
           muted
@@ -54,13 +54,15 @@ export function Hero() {
           <source src={hero.video.webm} type="video/webm" />
           <source src={hero.video.mp4} type="video/mp4" />
         </video>
-        {/* Grade for this brighter footage: shade under the nav and behind the copy (left), keeping the dark aura */}
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-dark/70 via-transparent via-25% to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-dark/75 via-bg-dark/30 via-55% to-transparent" />
+        {/* Shade only where text sits; the rest of the film stays clear */}
+        <div className="absolute inset-x-0 top-0 h-[180px] bg-gradient-to-b from-bg-dark/65 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_45%_at_20%_62%,rgba(8,16,20,0.85)_0%,rgba(8,16,20,0.6)_45%,transparent_100%)] lg:bg-[radial-gradient(ellipse_42%_40%_at_20%_62%,rgba(8,16,20,0.85)_0%,rgba(8,16,20,0.6)_45%,transparent_100%)]" />
+        {/* Fine film grain over the whole frame */}
+        <div className="hero-noise absolute inset-0" />
       </div>
 
       {/* Fade into background from 33% */}
-      <div className="absolute inset-0 flex min-h-[100svh] justify-center bg-gradient-to-b from-[rgba(8,16,20,0)] from-33% to-bg-dark">
+      <div className="absolute inset-0 flex min-h-[100svh] justify-center bg-gradient-to-b from-[rgba(8,16,20,0)] from-70% to-bg-dark">
         <div className="flex w-full max-w-[1200px] flex-col justify-end px-2xl pb-2xl pt-[120px]">
           <div className="flex flex-col justify-center gap-[36px] border-b border-line pb-[60px]">
             <div className="flex flex-col justify-center gap-2xl">
