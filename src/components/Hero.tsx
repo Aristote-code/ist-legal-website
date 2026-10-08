@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import { hero } from "@/content/site";
 
-const headline = [
-  ["Reimagine", "What", "Your"],
-  ["Business", "Can", "Achieve"],
-];
+// Index of each line's first word, so words reveal in reading order across lines.
+const lineStart = hero.headline.map((_, l) => hero.headline.slice(0, l).flat().length);
 
 export function Hero() {
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-bg-dark">
       {/* Image */}
       <div className="absolute inset-0 -z-10 overflow-clip">
-        <Image src="/media/hero.png" alt="" fill preload sizes="100vw" className="pointer-events-none object-cover object-[72%_center] lg:object-center" />
+        <Image src={hero.image} alt="" fill preload sizes="100vw" className="pointer-events-none object-cover object-[72%_center] lg:object-center" />
       </div>
 
       {/* Fade into background from 33% */}
@@ -20,10 +19,10 @@ export function Hero() {
           <div className="flex flex-col justify-center gap-[36px] border-b border-line pb-[60px]">
             <div className="flex flex-col justify-center gap-2xl">
               <h1 className="max-w-[764px] text-[44px] font-normal leading-[1.1] tracking-[-0.06em] text-white sm:text-[56px] lg:text-display-2xl lg:leading-[79.2px] lg:tracking-[-4.32px]">
-                {headline.map((line, l) => (
+                {hero.headline.map((line, l) => (
                   <span key={l} className="inline lg:block">
                     {line.map((word, w) => {
-                      const delay = 0.1 + (l * 3 + w) * 0.08;
+                      const delay = 0.1 + (lineStart[l] + w) * 0.08;
                       return (
                         <span key={word} className="word-in mr-[0.19em] last:mr-0" style={{ animationDelay: `${delay}s` }}>
                           {word}
@@ -34,31 +33,28 @@ export function Hero() {
                   </span>
                 ))}
               </h1>
-              <p className="max-w-[540px] text-lg leading-[25.2px] text-text-muted">
-                We help leaders navigate complexity, solve critical challenges, and build stronger, more resilient
-                organizations for the future.
-              </p>
+              <p className="max-w-[540px] text-lg leading-[25.2px] text-text-muted">{hero.body}</p>
             </div>
 
             <div className="flex flex-wrap items-center gap-2xl">
               <Link
-                href="#book-a-call"
+                href={hero.primaryCta.href}
                 className="flex h-[50.4px] min-w-[155px] items-center justify-center bg-white px-2xl py-[14px] text-md font-medium leading-[22.4px] text-bg-dark transition-opacity hover:opacity-90"
               >
-                Book a Call
+                {hero.primaryCta.label}
               </Link>
               <Link
-                href="#case-studies"
+                href={hero.secondaryCta.href}
                 className="flex h-[50.4px] items-center justify-center border border-line px-2xl py-[14px] text-md font-medium leading-[22.4px] text-white transition-colors hover:bg-white/5"
               >
-                View Case Studies
+                {hero.secondaryCta.label}
               </Link>
             </div>
           </div>
 
           <div className="flex items-center justify-between gap-[10px] pt-2xl text-sm leading-[19.6px] text-white">
-            <p>Build with intention</p>
-            <p className="text-right">Scale with confidence</p>
+            <p>{hero.strip[0]}</p>
+            <p className="text-right">{hero.strip[1]}</p>
           </div>
         </div>
       </div>
