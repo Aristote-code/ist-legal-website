@@ -2,7 +2,7 @@ import Image from "next/image";
 import { logoStrip } from "@/content/site";
 
 // Figma node 6:756 — white band under the hero, 90px tall, logos 30px high,
-// 72px apart, scrolling continuously inside the 1200px container.
+// 72px apart, scrolling continuously inside the 1200px container; edges fade out (as on the Elyte site).
 function LogoGroup({ hidden }: { hidden?: boolean }) {
   return (
     <ul className="flex shrink-0 items-center gap-[72px] pr-[72px]" aria-hidden={hidden || undefined}>
@@ -18,7 +18,7 @@ function LogoGroup({ hidden }: { hidden?: boolean }) {
 export function LogoStrip() {
   return (
     <section aria-label={logoStrip.label} className="flex justify-center border-b border-line-dark bg-bg-primary">
-      <div className="flex h-[90px] w-full max-w-[1200px] items-center overflow-clip">
+      <div className="flex h-[90px] w-full max-w-[1200px] items-center overflow-clip [mask-image:linear-gradient(90deg,transparent_0%,black_10%,black_90%,transparent_100%)]">
         <div className="logo-marquee flex w-max">
           <LogoGroup />
           <LogoGroup hidden />
