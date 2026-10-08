@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { nav, type NavMenu } from "@/content/site";
 import { Icon } from "./icons";
+import { Logo } from "./Logo";
 
 const linkClass = "text-[15px] font-medium leading-[21px] tracking-[-0.3px] text-white";
 
@@ -103,15 +104,8 @@ export function Navigation() {
         className="relative flex h-[86px] w-full max-w-[1200px] flex-col items-center justify-center px-2xl py-[18px]"
       >
         <div className="flex h-[50px] w-full items-center justify-center gap-[10px]">
-          <Link href="/" aria-label="IST Legal home" className="flex h-[30px] w-[97px] shrink-0 items-center">
-            <Image
-              src="/brand/ist-legal-logo.png"
-              alt="IST Legal"
-              width={97}
-              height={24}
-              className="h-auto w-[97px] object-contain invert"
-              preload
-            />
+          <Link href="/" aria-label="IST Legal home" className="flex h-[30px] shrink-0 items-center">
+            <Logo height={30} />
           </Link>
 
           <ul className="hidden h-[21px] flex-1 items-center justify-center gap-4xl lg:flex">
