@@ -104,8 +104,8 @@ export function Navigation() {
         className="relative flex h-[86px] w-full max-w-[1200px] flex-col items-center justify-center px-2xl py-[18px]"
       >
         <div className="flex h-[50px] w-full items-center justify-center gap-[10px]">
-          <Link href="/" aria-label="IST Legal home" className="flex h-[30px] shrink-0 items-center">
-            <Logo height={30} />
+          <Link href="/" aria-label="IST Legal home" className="flex h-[36px] shrink-0 items-center">
+            <Logo height={36} />
           </Link>
 
           <ul className="hidden h-[21px] flex-1 items-center justify-center gap-4xl lg:flex">
