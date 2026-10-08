@@ -7,7 +7,6 @@ const certia = localFont({
   src: [
     { path: "../fonts/Certia-Regular.otf", weight: "400", style: "normal" },
     { path: "../fonts/Certia-Medium.otf", weight: "500", style: "normal" },
-    { path: "../fonts/Certia-Black.otf", weight: "900", style: "normal" },
   ],
 });
 
