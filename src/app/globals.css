@@ -140,15 +140,17 @@ a:focus-visible > .logo .logo-roof-hover {
 }
 
 /* ── Hero film grain ─────────────────────────────────────────
- * Static, subtle, mostly-dark grain over the video — like the grain baked
- * into the Elyte hero photo. 256px tile drawn at 128 CSS px (one grain per
- * device pixel on retina). No animation, no blend mode.
+ * Static, subtle grain over the video — like the grain baked into the Elyte
+ * hero photo. Soft-light blending keeps it in shadows and mid-tones and lets
+ * it fall away on highlights (faces, sky, screens), as real film grain does.
+ * 256px tile drawn at 128 CSS px (one grain per device pixel on retina).
  */
 .hero-noise {
   pointer-events: none;
   background-image: url("/media/grain.png");
   background-size: 128px 128px;
-  opacity: 0.6;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
 }
 
 /* ── Logo strip marquee ──────────────────────────────────────
