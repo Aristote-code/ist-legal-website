@@ -140,35 +140,15 @@ a:focus-visible > .logo .logo-roof-hover {
 }
 
 /* ── Hero film grain ─────────────────────────────────────────
- * Fine pixel-level grain with a slight colour speckle, matching the grain
- * baked into the Elyte hero photo. Transparent light/dark specks — no blend
- * mode, so it renders the same over the video in every browser. 256px tile drawn at 128 CSS px so it is
- * one grain per device pixel on retina screens; jumps position 8×/s like film.
+ * Static, subtle, mostly-dark grain over the video — like the grain baked
+ * into the Elyte hero photo. 256px tile drawn at 128 CSS px (one grain per
+ * device pixel on retina). No animation, no blend mode.
  */
 .hero-noise {
   pointer-events: none;
-  overflow: hidden;
-}
-.hero-noise::after {
-  content: "";
-  position: absolute;
-  inset: -128px;
-  opacity: 0.55;
   background-image: url("/media/grain.png");
   background-size: 128px 128px;
-  animation: hero-grain 0.5s steps(1) infinite;
-}
-@keyframes hero-grain {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-37px, 21px); }
-  50% { transform: translate(53px, -44px); }
-  75% { transform: translate(-19px, -61px); }
-  100% { transform: translate(0, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-noise::after {
-    animation: none;
-  }
+  opacity: 0.6;
 }
 
 /* ── Logo strip marquee ──────────────────────────────────────
