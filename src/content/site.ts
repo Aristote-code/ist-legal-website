@@ -73,5 +73,11 @@ export const hero = {
   primaryCta: { label: "Start Free", href: "/sign-up" },
   secondaryCta: { label: "Book a Demo", href: "/book-a-demo" },
   strip: ["Grounded in legal sources", "Verify every authority"],
-  image: "/media/hero.png",
+  // Background film: 30s silent loop, transcoded from the supplied source (HEVC 39MB).
+  video: {
+    webm: "/media/hero-1080.webm",
+    mp4: "/media/hero-1080.mp4",
+    mp4Mobile: "/media/hero-720.mp4",
+    poster: "/media/hero-poster.jpg",
+  },
 };

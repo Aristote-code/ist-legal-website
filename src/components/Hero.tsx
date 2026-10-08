@@ -1,16 +1,62 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { hero } from "@/content/site";
 
 // Index of each line's first word, so words reveal in reading order across lines.
 const lineStart = hero.headline.map((_, l) => hero.headline.slice(0, l).flat().length);
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  // Respect reduced motion: hold on the poster frame instead of autoplaying.
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      if (mq.matches) videoRef.current?.pause();
+      setPaused(mq.matches);
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  const togglePlayback = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play().catch(() => {});
+      setPaused(false);
+    } else {
+      v.pause();
+      setPaused(true);
+    }
+  };
+
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-bg-dark">
-      {/* Image */}
+      {/* Background film */}
       <div className="absolute inset-0 -z-10 overflow-clip">
-        <Image src={hero.image} alt="" fill preload sizes="100vw" className="pointer-events-none object-cover object-[72%_center] lg:object-center" />
+        <video
+          ref={videoRef}
+          className="pointer-events-none h-full w-full object-cover [filter:brightness(0.72)_saturate(0.85)]"
+          poster={hero.video.poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden
+        >
+          <source src={hero.video.mp4Mobile} type="video/mp4" media="(max-width: 767px)" />
+          <source src={hero.video.webm} type="video/webm" />
+          <source src={hero.video.mp4} type="video/mp4" />
+        </video>
+        {/* Grade for this brighter footage: shade under the nav and behind the copy (left), keeping the dark aura */}
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-dark/70 via-transparent via-25% to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-dark/75 via-bg-dark/30 via-55% to-transparent" />
       </div>
 
       {/* Fade into background from 33% */}
@@ -54,7 +100,25 @@ export function Hero() {
 
           <div className="flex items-center justify-between gap-[10px] pt-2xl text-sm leading-[19.6px] text-white">
             <p>{hero.strip[0]}</p>
-            <p className="text-right">{hero.strip[1]}</p>
+            <div className="flex items-center gap-lg">
+              <p className="text-right">{hero.strip[1]}</p>
+              <button
+                type="button"
+                onClick={togglePlayback}
+                aria-label={paused ? "Play background video" : "Pause background video"}
+                className="flex size-[28px] shrink-0 items-center justify-center rounded-full border border-line text-white/80 transition-colors hover:border-white/40 hover:text-white"
+              >
+                {paused ? (
+                  <svg width="8" height="9" viewBox="0 0 8 9" aria-hidden>
+                    <path d="M0 0l8 4.5L0 9z" fill="currentColor" />
+                  </svg>
+                ) : (
+                  <svg width="7" height="9" viewBox="0 0 7 9" aria-hidden>
+                    <path d="M0 0h2.2v9H0zM4.8 0H7v9H4.8z" fill="currentColor" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
