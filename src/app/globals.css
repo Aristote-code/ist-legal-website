@@ -55,3 +55,84 @@ body {
     opacity: 1;
   }
 }
+
+/* ── Logo motion ─────────────────────────────────────────────
+ * Build-up (once): tile fades in → columns rise left→right →
+ * arch + lintel settle onto them → wordmark slides in. ~1.1s.
+ * Hover: the arch lifts slightly and settles back.
+ * Loader: columns pulse in sequence, like a typing indicator.
+ */
+.logo path,
+.logo g {
+  transform-box: fill-box;
+}
+
+.logo-tile {
+  animation: logo-fade 0.35s ease-out both;
+}
+
+.logo .logo-column {
+  transform-origin: 50% 100%;
+  animation: logo-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(0.15s + var(--i) * 0.09s);
+}
+
+.logo-roof {
+  animation: logo-settle 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.48s both;
+}
+
+.logo-wordmark {
+  animation: logo-slide 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 0.62s both;
+}
+
+.logo-roof-hover {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+a:hover > .logo .logo-roof-hover,
+a:focus-visible > .logo .logo-roof-hover {
+  transform: translateY(-28px);
+}
+
+@keyframes logo-fade {
+  from { opacity: 0; }
+}
+@keyframes logo-rise {
+  from { transform: scaleY(0); }
+}
+@keyframes logo-settle {
+  from { opacity: 0; transform: translateY(-110px); }
+}
+@keyframes logo-slide {
+  from { opacity: 0; transform: translateX(-60px); }
+}
+
+.logo-column-pulse {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: logo-pulse 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.16s);
+}
+@keyframes logo-pulse {
+  0%, 60%, 100% { opacity: 0.3; transform: scaleY(0.82); }
+  30% { opacity: 1; transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-tile,
+  .logo .logo-column,
+  .logo-roof,
+  .logo-wordmark {
+    animation: none;
+  }
+  .logo-roof-hover {
+    transition: none;
+  }
+  .logo-column-pulse {
+    animation: logo-fade-pulse 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.3s);
+  }
+}
+@keyframes logo-fade-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
