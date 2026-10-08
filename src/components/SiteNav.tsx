@@ -23,7 +23,7 @@ export function SiteNav() {
   const [open, setOpen] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hoverOpenedAt = useRef(0);
+  const openedBy = useRef<"hover" | "click">("click");
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -44,17 +44,19 @@ export function SiteNav() {
     };
   }, []);
 
-  const enter = (label: string, at: number) => {
+  const enter = (label: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    if (open !== label) hoverOpenedAt.current = at;
+    if (open !== label) openedBy.current = "hover";
     setOpen(label);
   };
-  // Hover already opened it: a click right after should not immediately close it.
-  const toggle = (label: string, at: number) => {
-    if (open === label && at - hoverOpenedAt.current > 400) setOpen(null);
-    else setOpen(label);
+  // A click only closes a menu that a click opened; a hover-opened menu stays open.
+  const toggle = (label: string) => {
+    if (open === label && openedBy.current === "click") return setOpen(null);
+    openedBy.current = "click";
+    setOpen(label);
   };
   const leave = () => {
+    if (openedBy.current === "click") return;
     closeTimer.current = setTimeout(() => setOpen(null), 160);
   };
 
@@ -77,12 +79,12 @@ export function SiteNav() {
 
           <ul className="hidden flex-1 items-center justify-center gap-8 lg:flex">
             {nav.groups.map((group) => (
-              <li key={group.label} onMouseEnter={(e) => enter(group.label, e.timeStamp)} onMouseLeave={leave}>
+              <li key={group.label} onMouseEnter={() => enter(group.label)} onMouseLeave={leave}>
                 <button
                   type="button"
                   aria-expanded={open === group.label}
                   aria-controls="nav-panel"
-                  onClick={(e) => toggle(group.label, e.timeStamp)}
+                  onClick={() => toggle(group.label)}
                   className="flex items-center gap-2 text-[15px] font-medium tracking-[-0.02em] text-on-ink/90 transition-colors hover:text-on-ink"
                 >
                   {group.label}
@@ -139,7 +141,7 @@ export function SiteNav() {
       {/* Desktop mega panel */}
       <div
         id="nav-panel"
-        onMouseEnter={(e) => open && enter(open, e.timeStamp)}
+        onMouseEnter={() => open && enter(open)}
         onMouseLeave={leave}
         className={`absolute inset-x-0 top-[86px] hidden lg:block transition-all duration-300 ${
           activeGroup ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1"
