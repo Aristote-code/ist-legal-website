@@ -7,15 +7,24 @@
   --color-bg-dark: #081014;
   --color-text-muted: #c8c8c8;
   --color-line: rgba(255, 255, 255, 0.12);
+  --color-bg-secondary: #f2f3f5; /* menu panel */
+  --color-text-tertiary: #707070;
+  --color-line-dark: rgba(8, 16, 20, 0.12);
 
   --text-display-2xl: 72px; /* Font size/display-2xl */
   --text-lg: 18px; /* Font size/text-lg */
   --text-md: 16px; /* Font size/text-md */
   --text-sm: 14px; /* Font size/text-sm */
+  --text-display-xs: 24px; /* Font size/display-xs */
+  --leading-text-md: 24px; /* Line height/text-md */
 
+  --spacing-xs: 4px;
+  --spacing-sm: 6px;
   --spacing-md: 8px;
+  --spacing-lg: 12px;
   --spacing-xl: 16px;
   --spacing-2xl: 20px;
+  --spacing-3xl: 24px;
   --spacing-4xl: 32px;
 }
 
