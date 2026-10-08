@@ -1,4 +1,4 @@
-// Menu tile icons — Hugeicons (stroke), 24px, white on #081014.
+// Site icons — Hugeicons (stroke).
 import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import {
   AiChat02Icon,
@@ -8,10 +8,15 @@ import {
   ContractsIcon,
   CourtHouseIcon,
   DocumentValidationIcon,
+  BookOpen01Icon,
   JusticeScale01Icon,
   LegalDocument01Icon,
+  LibraryIcon,
   Mortarboard02Icon,
   SecurityLockIcon,
+  SignatureIcon,
+  TimelineIcon,
+  TranslateIcon,
   WorkflowSquare03Icon,
 } from "@hugeicons/core-free-icons";
 
@@ -28,10 +33,15 @@ const icons = {
   education: Mortarboard02Icon,
   verification: DocumentValidationIcon,
   security: SecurityLockIcon,
+  esign: SignatureIcon,
+  playbook: BookOpen01Icon,
+  translate: TranslateIcon,
+  publications: LibraryIcon,
+  timeline: TimelineIcon,
 } satisfies Record<string, IconSvgElement>;
 
 export type IconName = keyof typeof icons;
 
-export function Icon({ name, className }: { name: IconName; className?: string }) {
-  return <HugeiconsIcon icon={icons[name]} size={24} color="currentColor" strokeWidth={1.5} className={className} aria-hidden />;
+export function Icon({ name, className, size = 24 }: { name: IconName; className?: string; size?: number }) {
+  return <HugeiconsIcon icon={icons[name]} size={size} color="currentColor" strokeWidth={1.5} className={className} aria-hidden />;
 }

@@ -11,11 +11,24 @@
   --color-text-tertiary: #707070;
   --color-line-dark: rgba(8, 16, 20, 0.12);
 
+  /* IST Legal app palette — used only inside product scenes */
+  --color-app-primary: #4e33d9;
+  --color-app-primary-50: #ede9fb;
+  --color-app-primary-100: #d9d2f8;
+  --color-app-line: #e5e5e5;
+  --color-app-muted: #737373;
+  --color-app-ink: #171717;
+  --color-app-input: #f4f4f5;
+  --color-app-success: #22c55e;
+
   --text-display-2xl: 72px; /* Font size/display-2xl */
   --text-lg: 18px; /* Font size/text-lg */
   --text-md: 16px; /* Font size/text-md */
   --text-sm: 14px; /* Font size/text-sm */
+  --text-display-lg: 52px; /* section headings */
   --text-display-xs: 24px; /* Font size/display-xs */
+  --text-xl: 20px; /* Font size/text-xl */
+  --text-xs: 12px; /* Font size/text-xs */
   --leading-text-md: 24px; /* Line height/text-md */
 
   --spacing-xs: 4px;
@@ -26,6 +39,8 @@
   --spacing-2xl: 20px;
   --spacing-3xl: 24px;
   --spacing-4xl: 32px;
+  --spacing-5xl: 40px;
+  --spacing-11xl: 160px;
 }
 
 @theme inline {
@@ -168,5 +183,33 @@ a:focus-visible > .logo .logo-roof-hover {
 @media (prefers-reduced-motion: reduce) {
   .logo-marquee {
     animation: none;
+  }
+}
+
+/* ── Scroll reveal for section headings ──────────────────────
+ * Words resolve from blur once the heading enters the viewport (Figma's
+ * per-word heading layers). Hidden only after JS marks it not yet visible.
+ */
+.reveal .reveal-word {
+  display: inline-block;
+  white-space: pre;
+}
+.reveal[data-visible="false"] .reveal-word {
+  opacity: 0;
+}
+.reveal[data-visible="true"] .reveal-word {
+  animation: word-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal .reveal-word {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-layer {
+    transition: none !important;
+    translate: none !important;
   }
 }
