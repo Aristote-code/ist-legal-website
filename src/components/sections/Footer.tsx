@@ -22,7 +22,7 @@ export function Footer() {
         <div className="flex flex-col gap-3xl lg:flex-row lg:items-end">
           <div className="flex flex-col gap-[10px] lg:flex-[696_0_0]">
             <SectionLabel light>{footer.label}</SectionLabel>
-            <RevealHeading text={footer.heading} light className="max-w-[576px]" />
+            <RevealHeading text={footer.heading} light className="max-w-[640px]" />
           </div>
           <p className="max-w-[480px] text-lg leading-[25.2px] text-text-muted lg:flex-[480_0_0]">{footer.body}</p>
         </div>
@@ -71,7 +71,7 @@ export function Footer() {
             <ActionTile href={footer.cta.href} title={footer.cta.label} className="min-h-[120px] md:w-[236px]" />
           </div>
 
-          <div className="grid bg-white md:grid-cols-2">
+          <div className="grid bg-white lg:grid-cols-[1fr_2fr]">
             <div className="flex flex-col gap-2xl p-4xl">
               <p className="text-xs font-semibold uppercase leading-[16.8px] tracking-[0.72px] text-bg-dark">Contact</p>
               <div className="flex flex-col gap-lg text-sm leading-[19.6px] text-text-tertiary">
@@ -83,7 +83,7 @@ export function Footer() {
                 </a>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-[40px] border-t border-line-dark p-4xl sm:grid-cols-3 md:border-l md:border-t-0">
+            <div className="grid grid-cols-2 gap-x-[40px] gap-y-[48px] border-t border-line-dark p-4xl sm:grid-cols-3 lg:border-l lg:border-t-0">
               {footer.columns.map((col) => (
                 <div key={col.title} className="flex flex-col gap-2xl">
                   <p className="text-xs font-semibold uppercase leading-[16.8px] tracking-[0.72px] text-bg-dark">{col.title}</p>
@@ -107,7 +107,15 @@ export function Footer() {
             <Logo height={30} />
           </Link>
           <p className="text-sm leading-[19.6px] text-text-muted sm:flex-1">{footer.copyright}</p>
-          <p className="text-sm leading-[19.6px] text-white">{footer.tagline}</p>
+          <ul className="flex gap-2xl">
+            {footer.legal.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="text-sm leading-[19.6px] text-white transition-opacity hover:opacity-70">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

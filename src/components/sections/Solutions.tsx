@@ -15,6 +15,7 @@ export function Solutions() {
           <div id="solutions-heading">
             <RevealHeading text={solutions.heading} className="max-w-[696px]" />
           </div>
+          <p className="max-w-[560px] text-lg leading-[25.2px] text-text-tertiary">{solutions.intro}</p>
         </div>
 
         <ul className="grid gap-[10px] sm:grid-cols-2 lg:grid-cols-4">
@@ -40,7 +41,12 @@ export function Solutions() {
                 </span>
                 <CornerMark />
               </Link>
-              <p className="text-md leading-[24px] text-text-tertiary">{item.description}</p>
+              <div className="flex flex-col gap-lg">
+                <p className="text-md leading-[24px] text-text-tertiary">{item.description}</p>
+                <Link href={item.href} className="self-start text-md font-medium leading-[22.4px] text-bg-dark underline decoration-line-dark underline-offset-4 transition-colors hover:decoration-bg-dark">
+                  {item.cta} →
+                </Link>
+              </div>
             </li>
           ))}
         </ul>

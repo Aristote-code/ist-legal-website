@@ -160,6 +160,8 @@ export function PlatformShowcase() {
         <div id="platform-heading">
           <RevealHeading text={platform.heading} className="max-w-[560px]" />
         </div>
+        <p className="max-w-[560px] text-lg leading-[25.2px] text-text-tertiary">{platform.body}</p>
+        <p className="text-sm font-medium leading-[19.6px] text-bg-dark">{platform.support}</p>
       </div>
 
       {/* Desktop: pinned walkthrough */}

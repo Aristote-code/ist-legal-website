@@ -82,18 +82,19 @@ export const hero = {
   },
 };
 
-// Logo strip under the hero (Figma node 6:756).
-// PLACEHOLDER logos from the Figma template — replace with real, approved IST Legal
-// partners/clients before publishing (the brief forbids invented client logos).
+// Strip under the hero (Figma node 6:756). No approved customer logos yet, so it states
+// what IST Legal works with instead of implying client relationships.
 export const logoStrip = {
-  label: "Trusted by legal teams and institutions",
-  logos: [
-    { name: "FeatherDev", src: "/media/logos/featherdev.png", width: 123 },
-    { name: "Spherule", src: "/media/logos/spherule.png", width: 103 },
-    { name: "GlobalBank", src: "/media/logos/globalbank.png", width: 123 },
-    { name: "Nietzsche", src: "/media/logos/nietzsche.png", width: 113 },
+  label: "Built for serious legal work",
+  items: [
+    { icon: "legislation", label: "Legislation" },
+    { icon: "caseLaw", label: "Case law" },
+    { icon: "government", label: "Judicial decisions" },
+    { icon: "verification", label: "Regulations" },
+    { icon: "contract", label: "Contracts" },
+    { icon: "research", label: "Legal research" },
   ],
-};
+} as const;
 
 // ── Homepage sections (Figma page 6:548, adapted to IST Legal) ──────────────
 
@@ -102,6 +103,8 @@ export const logoStrip = {
 export const platform = {
   label: "The platform",
   heading: "One platform for serious legal work",
+  body: "From legal questions and research to documents and the workflows around them, IST Legal brings more of the legal process into one connected environment — grounded in the law of your jurisdiction.",
+  support: "Research. Understand. Verify. Continue the work.",
   features: [
     {
       numeral: "I",
@@ -153,13 +156,14 @@ export const platform = {
 
 // Section 4 — solutions (Figma "Services" 6:946)
 export const solutions = {
-  label: "Solutions",
-  heading: "The same platform. Different kinds of legal work.",
+  label: "Built for legal work",
+  heading: "One platform. Different kinds of legal work.",
+  intro: "IST Legal adapts to the questions, documents and workflows different legal professionals work with every day.",
   items: [
-    { title: "Law Firms", href: "/solutions/law-firms", image: "/media/stills/law-firms.jpg", description: "Research authorities, prepare matters and review contracts with more consistency across the firm." },
-    { title: "Government", href: "/solutions/government", image: "/media/stills/government.jpg", description: "Support policy analysis, regulatory interpretation, compliance reviews and legal advisory work." },
-    { title: "Businesses", href: "/solutions/businesses", image: "/media/stills/businesses.jpg", description: "Review commercial agreements and understand legal requirements without losing control." },
-    { title: "Education", href: "/solutions/education", image: "/media/stills/education.jpg", description: "Help students and institutions research case law and understand legislation." },
+    { title: "Law Firms", cta: "For Law Firms", href: "/solutions/law-firms", image: "/media/stills/law-firms.jpg", description: "Research authorities, prepare matters, review documents and build more consistent legal work across the firm." },
+    { title: "Government", cta: "For Government", href: "/solutions/government", image: "/media/stills/government.jpg", description: "Support policy analysis, regulatory interpretation, compliance work and legal advisory functions." },
+    { title: "Businesses", cta: "For Businesses", href: "/solutions/businesses", image: "/media/stills/businesses.jpg", description: "Review commercial agreements, understand legal requirements and support procurement and compliance decisions." },
+    { title: "Education", cta: "For Education", href: "/solutions/education", image: "/media/stills/education.jpg", description: "Research legislation and case law, understand legal concepts and build stronger research habits." },
   ],
 };
 
@@ -180,13 +184,18 @@ export const workflowTools = {
 // Section 6 — assurance (Figma "Case studies" 6:1175)
 export const assurance = {
   label: "Assurance",
-  heading: "Keep judgment where it belongs",
+  heading: "The answer should never be the end of the research",
   items: [
     {
       icon: "verification",
       eyebrow: "Sources & Verification",
       title: "AI analysis is not the legal source",
-      body: "IST Legal distinguishes AI-generated analysis from the underlying legislation and case law. Review the cited authorities, open the original text, and apply your professional judgment before relying on an answer.",
+      body: "IST Legal keeps the relationship between AI-assisted analysis and the underlying legal authority visible. Review the reference, open the source, then make the professional judgment yourself.",
+      principles: [
+        { title: "Sources stay visible", body: "Move from analysis back to the relevant legal authority." },
+        { title: "Verification is part of the workflow", body: "Inspect the basis of an answer instead of treating it as final." },
+        { title: "Professional judgment stays in control", body: "IST Legal supports legal reasoning; it does not replace the professional." },
+      ],
       link: { label: "How verification works", href: "/trust/verification" },
       image: "/media/stills/verification.jpg",
     },
@@ -195,6 +204,7 @@ export const assurance = {
       eyebrow: "Security & Privacy",
       title: "Designed for sensitive legal work",
       body: "Legal information is sensitive. IST Legal is designed with organisational access, privacy and responsible data handling in mind. Talk to us about your security and deployment requirements.",
+      principles: [],
       link: { label: "Security & Privacy", href: "/trust/security" },
       image: "/media/stills/security.jpg",
     },
@@ -208,10 +218,13 @@ export const howItWorks = {
   heading: "From question to authority",
   image: "/media/stills/approach.jpg",
   cta: { label: "Start Free", href: "/sign-up" },
+  closing: "AI should help you reach the law faster — not separate you from it.",
   steps: [
-    { title: "Ask", body: "Describe the issue in plain language and choose the area of law. IST Legal searches trusted, jurisdiction-specific legal sources." },
-    { title: "Review the sources", body: "Read the analysis alongside the authorities it relies on. Open the cited legislation or decision and check it before relying on it." },
-    { title: "Draft and continue", body: "Turn the research into a memo or document, export it to Word, and keep the matter moving — with professional judgment in control." },
+    { title: "Ask", body: "Start with the legal question, issue or document — in plain language, in the right area of law." },
+    { title: "Research", body: "IST Legal searches relevant, jurisdiction-specific legal sources." },
+    { title: "Analyze", body: "Use AI assistance to understand the material and identify what matters." },
+    { title: "Verify", body: "Review the authorities supporting the analysis and open the original source." },
+    { title: "Continue", body: "Apply professional judgment and move the legal work forward — draft, export and keep going." },
   ],
 };
 
@@ -231,31 +244,49 @@ export const faq = {
 
 // Footer (Figma 6:1601)
 export const footer = {
-  label: "Get started",
-  heading: "Ready to practice smarter?",
-  body: "Work smarter. Research faster. Practice with confidence — with AI built specifically for legal work.",
+  label: "IST Legal",
+  heading: "Work smarter. Research faster. Practice with confidence.",
+  body: "Experience legal intelligence built around the sources, documents and workflows serious legal work depends on.",
   image: "/media/stills/footer.jpg",
   updates: { title: "Sign up for updates", note: "Email updates are coming soon. In the meantime, book a demo to talk to our team." },
   cta: { label: "Start Free", href: "/sign-up" },
   contact: { email: "support@ist-legal.rw", phone: "+250 795 586 192" },
   columns: [
     { title: "Platform", links: [
-      { label: "Platform Overview", href: "/platform" },
       { label: "AI Legal Assistant", href: "/platform/ai-legal-assistant" },
+      { label: "Legal Research", href: "/platform/legal-research" },
+      { label: "Case Law", href: "/platform/case-law" },
+      { label: "Legislation", href: "/platform/legislation" },
+      { label: "Contract Review & Drafting", href: "/platform/contract-review" },
       { label: "Workflow Tools", href: "/platform/workflow-tools" },
+    ] },
+    { title: "Solutions", links: [
+      { label: "Law Firms", href: "/solutions/law-firms" },
+      { label: "Government", href: "/solutions/government" },
+      { label: "Businesses", href: "/solutions/businesses" },
+      { label: "Education", href: "/solutions/education" },
+    ] },
+    { title: "Assurance", links: [
+      { label: "Sources & Verification", href: "/trust/verification" },
+      { label: "Security & Privacy", href: "/trust/security" },
+    ] },
+    { title: "Resources", links: [
+      { label: "User Guide", href: "/resources" },
       { label: "Pricing", href: "/pricing" },
     ] },
     { title: "Company", links: [
-      { label: "Solutions", href: "/solutions/law-firms" },
-      { label: "Assurance", href: "/trust/verification" },
-      { label: "Resources", href: "/resources" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/book-a-demo" },
+    ] },
+    { title: "Account", links: [
+      { label: "Sign In", href: "/sign-in" },
+      { label: "Start Free", href: "/sign-up" },
       { label: "Book a Demo", href: "/book-a-demo" },
     ] },
-    { title: "Legal", links: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms & Conditions", href: "/terms" },
-    ] },
   ],
-  copyright: "Copyright © 2026 IST Legal",
-  tagline: "Legal intelligence you can verify.",
+  legal: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+  ],
+  copyright: "© 2026 IST Legal. All rights reserved.",
 };

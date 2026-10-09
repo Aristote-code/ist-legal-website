@@ -17,7 +17,7 @@ export function HowItWorks() {
           <ActionTile href={howItWorks.cta.href} title={howItWorks.cta.label} className="absolute bottom-lg left-lg h-[130px] w-[236px]" />
         </div>
 
-        <div className="flex w-full flex-col gap-[80px] lg:flex-[550_0_0] lg:gap-11xl">
+        <div className="flex w-full flex-col gap-[80px] lg:flex-[550_0_0] lg:gap-[100px]">
           <div className="flex flex-col gap-3xl">
             <SectionLabel>{howItWorks.label}</SectionLabel>
             <div id="how-heading">
@@ -25,6 +25,7 @@ export function HowItWorks() {
             </div>
           </div>
 
+          <div className="flex flex-col gap-4xl">
           <ol className="flex flex-col gap-3xl">
             {howItWorks.steps.map((step, i) => {
               const isOpen = i === open;
@@ -52,6 +53,8 @@ export function HowItWorks() {
               );
             })}
           </ol>
+          <p className="text-lg leading-[25.2px] text-bg-dark">{howItWorks.closing}</p>
+          </div>
         </div>
       </div>
     </section>
