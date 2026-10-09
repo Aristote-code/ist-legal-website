@@ -53,7 +53,7 @@ export function RevealHeading({
     <Tag
       ref={ref}
       data-visible={visible}
-      className={`reveal text-[40px] font-normal leading-[1.1] tracking-[-0.06em] lg:text-display-lg lg:leading-[57.2px] lg:tracking-[-3.12px] ${
+      className={`reveal font-display text-[40px] font-normal leading-[1.1] tracking-[-0.02em] lg:text-display-lg lg:leading-[57.2px] ${
         light ? "text-white" : "text-bg-dark"
       } ${className}`}
     >

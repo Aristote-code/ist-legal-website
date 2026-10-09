@@ -15,7 +15,7 @@ export default function Page() {
         <PageHero compact label="Terms" title="Terms & Conditions" body="The terms that apply to using IST Legal." variant="plain" />
         <section className="px-2xl py-[120px]">
           <div className="mx-auto flex max-w-[760px] flex-col gap-2xl text-lg leading-[28px] text-text-tertiary">
-            <p className="text-[28px] leading-[1.25] tracking-[-0.04em] text-bg-dark">Our terms and conditions for the new IST Legal website is being finalised.</p>
+            <p className="font-display text-[28px] leading-[1.25] tracking-[-0.01em] text-bg-dark">Our terms and conditions for the new IST Legal website is being finalised.</p>
             <p>
               Until it is published here, please contact us with any questions at{" "}
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-bg-dark underline underline-offset-4">

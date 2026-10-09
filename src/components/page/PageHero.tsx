@@ -25,7 +25,7 @@ function Title({ title, size }: { title: string; size: "lg" | "md" }) {
   const words = title.split(" ");
   return (
     <h1
-      className={`max-w-[860px] font-normal leading-[1.08] tracking-[-0.055em] text-white ${
+      className={`max-w-[860px] font-display font-normal leading-[1.08] tracking-[-0.02em] text-white ${
         size === "lg" ? "text-[42px] sm:text-[54px] lg:text-[64px]" : "text-[38px] sm:text-[48px] lg:text-[56px]"
       }`}
     >
@@ -71,14 +71,14 @@ export function PageHero({ label, title, body, primary, secondary, image, varian
       <section className="relative isolate overflow-hidden bg-bg-dark">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_70%_at_80%_40%,rgba(78,51,217,0.14),transparent_70%)]" />
         <div className="hero-noise absolute inset-0 -z-10" />
-        <div className="mx-auto grid max-w-[1200px] items-center gap-[60px] px-2xl pb-[100px] pt-[150px] lg:grid-cols-[1fr_520px] lg:gap-[64px] lg:pt-[170px]">
+        <div className="mx-auto grid max-w-[1200px] items-center gap-[60px] px-2xl pb-[100px] pt-[150px] lg:grid-cols-[1fr_600px] lg:gap-[56px] lg:pt-[170px]">
           <div className="flex flex-col gap-2xl">
             <SectionLabel light>{label}</SectionLabel>
             <Title title={title} size="md" />
             <p className="max-w-[520px] text-lg leading-[25.2px] text-text-muted">{body}</p>
             <Ctas primary={primary} secondary={secondary} />
           </div>
-          <SceneFrame features={[scene]} />
+          <SceneFrame features={[scene]} tone="dark" />
         </div>
       </section>
     );

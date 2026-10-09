@@ -1,3 +1,9 @@
+# Netlify runs the Next.js app with its Next.js adapter (detected
+# automatically). The messenger's data needs DATABASE_URL (Postgres) to
+# persist on Netlify; see "Messenger & feedback" in the README.
 [build]
   command = "npm run build"
   publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"

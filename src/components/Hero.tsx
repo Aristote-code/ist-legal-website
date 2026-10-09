@@ -66,7 +66,7 @@ export function Hero() {
         <div className="flex w-full max-w-[1200px] flex-col justify-end px-2xl pb-2xl pt-[120px]">
           <div className="flex flex-col justify-center gap-[36px] border-b border-line pb-[60px]">
             <div className="flex flex-col justify-center gap-2xl">
-              <h1 className="max-w-[764px] text-[44px] font-normal leading-[1.1] tracking-[-0.06em] text-white sm:text-[56px] lg:text-display-2xl lg:leading-[79.2px] lg:tracking-[-4.32px]">
+              <h1 className="max-w-[764px] font-display text-[44px] font-normal leading-[1.1] tracking-[-0.02em] text-white sm:text-[56px] lg:text-display-2xl lg:leading-[79.2px]">
                 {hero.headline.map((line, l) => (
                   <span key={l} className="inline lg:block">
                     {line.map((word, w) => {

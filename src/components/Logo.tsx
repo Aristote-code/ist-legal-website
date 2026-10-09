@@ -18,12 +18,12 @@ const COLUMNS = [
 const WORDMARK =
   "M1003.71 436.01H953.031V250.013H1003.71V436.01ZM1133.35 438.622C1081.89 438.622 1053.15 414.328 1053.15 378.016H1099.65C1103.31 395.78 1113.76 405.184 1134.66 405.184C1154.51 405.184 1162.87 396.825 1162.87 387.16C1162.87 376.449 1157.38 371.486 1132.57 364.955L1109.58 358.685C1074.31 349.02 1057.33 330.995 1057.33 306.439C1057.33 272.74 1079.54 247.401 1133.35 247.401C1182.46 247.401 1209.37 269.083 1209.37 305.394H1164.44C1160.26 289.198 1149.81 280.838 1132.04 280.838C1114.02 280.838 1106.44 288.937 1106.44 298.863C1106.44 307.484 1112.71 312.709 1134.13 318.456L1157.12 324.725C1196.57 335.175 1213.55 351.11 1213.55 379.584C1213.55 413.283 1185.6 438.622 1133.35 438.622ZM1356.72 436.01H1306.04V288.675H1252.49V250.013H1410.27V288.675H1356.72V436.01ZM1679.55 436.01H1545.8V250.013H1596.48V397.348H1679.55V436.01ZM1873.28 436.01H1728.56V250.013H1873.28V286.063H1779.24V323.158H1864.92V359.208H1779.24V399.96H1873.28V436.01ZM2009.71 438.622C1957.47 438.622 1918.02 398.654 1918.02 343.011C1918.02 287.369 1956.42 247.401 2014.94 247.401C2069.53 247.401 2100.88 281.883 2102.45 313.231H2055.95C2049.68 298.08 2036.62 286.063 2014.94 286.063C1987.51 286.063 1968.7 305.917 1968.7 343.011C1968.7 380.106 1987.51 399.96 2014.94 399.96C2035.05 399.96 2050.46 389.249 2057.26 368.612H2019.9V334.652H2105.06V436.01H2065.62V408.058C2056.73 426.605 2038.71 438.622 2009.71 438.622ZM2338.27 436.01H2287.59L2275.84 401.266H2207.66L2196.16 436.01H2145.48L2213.93 250.013H2269.83L2338.27 436.01ZM2241.88 292.594L2217.32 365.216H2266.43L2241.88 292.594ZM2515.19 436.01H2381.44V250.013H2432.11V397.348H2515.19V436.01Z";
 
-function Mark({ columnClass }: { columnClass: string }) {
+function Mark({ columnClass, still = false }: { columnClass: string; still?: boolean }) {
   return (
     <>
-      <path className="logo-tile" d={TILE} fill="white" />
+      <path className={still ? undefined : "logo-tile"} d={TILE} fill="white" />
       {/* Outer group: settles onto the columns on load. Inner group: lifts on hover. */}
-      <g className="logo-roof">
+      <g className={still ? undefined : "logo-roof"}>
         <g className="logo-roof-hover">
           <path d={ARCH} fill="black" />
           <path d={LINTEL} fill="black" />
@@ -65,7 +65,22 @@ export function LogoLoader({ size = 24, label = "Loading" }: { size?: number; la
       viewBox={`${MARK_VIEWBOX.x} ${MARK_VIEWBOX.y} ${MARK_VIEWBOX.w} ${MARK_VIEWBOX.h}`}
       fill="none"
     >
-      <Mark columnClass="logo-column-pulse" />
+      <Mark columnClass="logo-column-pulse" still />
+    </svg>
+  );
+}
+
+/** The mark alone, still — the IST Legal team's avatar in the messenger. */
+export function LogoMark({ size = 24 }: { size?: number }) {
+  return (
+    <svg
+      aria-hidden
+      width={(size * MARK_VIEWBOX.w) / MARK_VIEWBOX.h}
+      height={size}
+      viewBox={`${MARK_VIEWBOX.x} ${MARK_VIEWBOX.y} ${MARK_VIEWBOX.w} ${MARK_VIEWBOX.h}`}
+      fill="none"
+    >
+      <Mark columnClass="" still />
     </svg>
   );
 }

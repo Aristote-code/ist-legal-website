@@ -106,8 +106,6 @@ export const logoStrip = {
 export const platform = {
   label: "The platform",
   heading: "One platform for serious legal work",
-  body: "From legal questions and research to documents and the workflows around them, IST Legal brings more of the legal process into one connected environment — grounded in the law of your jurisdiction.",
-  support: "Research. Understand. Verify. Continue the work.",
   features: [
     {
       numeral: "I",

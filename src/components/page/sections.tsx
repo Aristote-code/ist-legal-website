@@ -29,7 +29,7 @@ export function Statement({ data }: { data: DetailPage["statement"] }) {
     <section className="bg-bg-secondary px-2xl pb-[80px] pt-[120px] lg:pt-[160px]">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-3xl">
         <SectionLabel>{data.label}</SectionLabel>
-        <p className="max-w-[1040px] text-[28px] leading-[1.25] tracking-[-0.04em] text-bg-dark lg:text-[40px] lg:leading-[1.2]">{data.text}</p>
+        <p className="max-w-[1040px] font-display text-[28px] leading-[1.25] tracking-[-0.01em] text-bg-dark lg:text-[40px] lg:leading-[1.2]">{data.text}</p>
         {data.chips && (
           <div className="flex flex-col gap-xl pt-3xl">
             {data.chipsLabel && <p className="text-xs font-semibold uppercase leading-[16.8px] tracking-[0.72px] text-bg-dark">{data.chipsLabel}</p>}

@@ -15,11 +15,13 @@
   --color-app-primary: #4e33d9;
   --color-app-primary-50: #ede9fb;
   --color-app-primary-100: #d9d2f8;
+  --color-app-primary-200: #b3a5f1;
   --color-app-line: #e5e5e5;
   --color-app-muted: #737373;
   --color-app-ink: #171717;
   --color-app-input: #f4f4f5;
   --color-app-success: #22c55e;
+
 
   --text-display-2xl: 72px; /* Font size/display-2xl */
   --text-lg: 18px; /* Font size/text-lg */
@@ -45,6 +47,8 @@
 
 @theme inline {
   --font-sans: var(--font-certia);
+  --font-display: var(--font-forum), Georgia, serif;
+  --font-app: var(--font-dm-sans), system-ui, sans-serif;
 }
 
 /* Visible focus on light and dark surfaces: dark inner ring + white outer ring */
@@ -52,6 +56,16 @@
   outline: 2px solid #ffffff;
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--color-bg-dark);
+}
+
+/* Sharp icons: Hugeicons' free set draws rounded caps and joins; square them off so
+ * every icon reads like the "Stroke Sharp" style. (Swap to @hugeicons-pro sharp icons
+ * if a Pro licence is added.) */
+svg [stroke-linecap="round"] {
+  stroke-linecap: square;
+}
+svg [stroke-linejoin="round"] {
+  stroke-linejoin: miter;
 }
 
 body {
@@ -218,5 +232,161 @@ a:focus-visible > .logo .logo-roof-hover {
   .scene-layer {
     transition: none !important;
     translate: none !important;
+  }
+}
+
+/* ── Messenger & feedback popup ──────────────────────────────
+ * Panels rise in; text from the help centre, updates and the assistant
+ * (RichText) gets paragraph, list and link styles.
+ */
+@keyframes messenger-in {
+  from { opacity: 0; transform: translateY(12px); }
+}
+.messenger-in {
+  animation: messenger-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes overlay-in {
+  from { opacity: 0; }
+}
+.overlay-in {
+  animation: overlay-in 0.25s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .messenger-in,
+  .overlay-in {
+    animation: none;
+  }
+}
+
+.rich > * + * {
+  margin-top: 10px;
+}
+.rich ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+.rich li + li {
+  margin-top: 4px;
+}
+.rich strong {
+  font-weight: 600;
+}
+.rich a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.rich-article {
+  font-size: 16px;
+  line-height: 26px;
+  color: #adaeb2;
+}
+.rich-article > * + * {
+  margin-top: 16px;
+}
+.rich-article strong {
+  color: #ffffff;
+}
+
+/* ── Product demos (components/demo) ─────────────────────────
+ * Motion vocabulary for the animated app walkthroughs: things rise, pop and
+ * slide in the way the real app does; the cursor presses with a ripple.
+ */
+@keyframes demo-rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+@keyframes demo-fade {
+  from { opacity: 0; }
+}
+@keyframes demo-pop {
+  from { opacity: 0; transform: scale(0.94) translateY(4px); }
+}
+@keyframes demo-swap {
+  from { opacity: 0; transform: translateY(-5px); filter: blur(2px); }
+}
+@keyframes demo-modal {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+}
+@keyframes demo-modal-out {
+  to { opacity: 0; transform: scale(0.97) translateY(4px); }
+}
+@keyframes demo-menu-down {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+}
+@keyframes demo-menu-up {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+}
+@keyframes demo-drawer {
+  from { transform: translateX(100%); }
+}
+@keyframes demo-toast {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+}
+@keyframes demo-doc {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+}
+@keyframes demo-word {
+  from { opacity: 0; filter: blur(3px); }
+}
+@keyframes demo-blink {
+  50% { opacity: 0; }
+}
+@keyframes demo-dot {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+@keyframes demo-highlight {
+  from { transform: scaleX(0); }
+}
+@keyframes demo-focus {
+  from { background-color: transparent; border-color: transparent; }
+}
+@keyframes demo-ripple {
+  from { opacity: 0.55; transform: scale(0.2); }
+  to { opacity: 0; transform: scale(1); }
+}
+@keyframes demo-press {
+  40% { transform: scale(0.82); }
+}
+
+.demo-rise { animation: demo-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.demo-fade { animation: demo-fade 0.4s ease-out both; }
+.demo-pop { animation: demo-pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+.demo-swap { display: inline-block; animation: demo-swap 0.35s ease-out both; }
+.demo-modal { animation: demo-modal 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.demo-modal-out { animation: demo-modal-out 0.3s ease-in forwards; }
+.demo-menu-down { animation: demo-menu-down 0.22s ease-out both; transform-origin: top left; }
+.demo-menu-up { animation: demo-menu-up 0.22s ease-out both; transform-origin: bottom left; }
+.demo-drawer { animation: demo-drawer 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.demo-toast { animation: demo-toast 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.demo-doc { animation: demo-doc 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.demo-word { animation: demo-word 0.35s ease-out both; }
+.demo-dot { animation: demo-dot 1s ease-in-out infinite; }
+.demo-highlight { transform-origin: left; animation: demo-highlight 0.9s 0.3s cubic-bezier(0.6, 0, 0.2, 1) both; }
+.demo-focus { animation: demo-focus 0.6s 0.2s ease-out both; }
+.demo-caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--color-app-primary);
+  animation: demo-blink 1s step-end infinite;
+}
+.demo-press { animation: demo-press 0.28s ease-out; }
+.demo-ripple {
+  position: absolute;
+  left: -14px;
+  top: -14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background: rgba(78, 51, 217, 0.35);
+  animation: demo-ripple 0.55s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="demo-"] {
+    animation: none !important;
   }
 }

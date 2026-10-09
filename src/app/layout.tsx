@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import { Messenger } from "@/components/messenger";
 import "./globals.css";
 
 const certia = localFont({
@@ -11,6 +13,15 @@ const certia = localFont({
   ],
 });
 
+const forum = localFont({
+  variable: "--font-forum",
+  src: "../fonts/Forum-Regular.otf",
+  weight: "400",
+});
+
+// The IST Legal app's typeface, used inside the product demos
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
+
 export const metadata: Metadata = {
   title: "IST Legal | AI-Powered Legal Research Platform",
   description:
@@ -19,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${certia.variable} h-full antialiased`}>
+    <html lang="en" className={`${certia.variable} ${forum.variable} ${dmSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <a
           href="#main"
@@ -28,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to main content
         </a>
         {children}
+        <Messenger source="website" />
       </body>
     </html>
   );
