@@ -11,8 +11,8 @@ export default function Page() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
-        <PageHero compact label="Terms" title="Terms & Conditions" body="The terms that apply to using IST Legal." image="/media/stills/footer.jpg" />
+      <main id="main" className="flex-1 bg-bg-secondary">
+        <PageHero compact label="Terms" title="Terms & Conditions" body="The terms that apply to using IST Legal." variant="plain" />
         <section className="px-2xl py-[120px]">
           <div className="mx-auto flex max-w-[760px] flex-col gap-2xl text-lg leading-[28px] text-text-tertiary">
             <p className="text-[28px] leading-[1.25] tracking-[-0.04em] text-bg-dark">Our terms and conditions for the new IST Legal website is being finalised.</p>
@@ -26,7 +26,7 @@ export default function Page() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

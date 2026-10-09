@@ -11,7 +11,9 @@ export const CONTACT_EMAIL = "info@istlegal.ai";
 
 export type DetailPage = {
   meta: { title: string; description: string };
-  hero: { label: string; title: string; body: string; primary: Cta; secondary: Cta; image: string };
+  hero: { label: string; title: string; body: string; primary: Cta; secondary: Cta; image?: string };
+  heroVariant?: "photo" | "product" | "plain";
+  heroScene?: { scene: SceneName; caption: string; tag: string };
   statement: { label: string; text: string; chipsLabel?: string; chips?: string[] };
   feature?: {
     label: string;
@@ -23,7 +25,7 @@ export type DetailPage = {
   };
   steps?: { heading: string; items: { title: string; body: string }[] };
   tools?: boolean;
-  band?: { image: string; label: string; heading: string; items: string[]; cta: Cta };
+  band?: { image?: string; label: string; heading: string; items: string[]; cta: Cta };
   who?: { label: string; heading: string; body: string; cta: Cta };
   faq?: { q: string; a: string }[];
 };
@@ -45,8 +47,9 @@ export const productPages: Record<string, DetailPage> = {
       body: "Use natural language to explore legal questions, identify relevant authorities and continue your research without losing sight of the underlying sources.",
       primary: startFree,
       secondary: bookDemo,
-      image: "/media/stills/verification.jpg",
     },
+    heroVariant: "product",
+    heroScene: { scene: "assistant", caption: "AI Legal Assistant", tag: "Rwanda · Labour law · Illustrative" },
     statement: {
       label: "Legal answers you can rely on",
       text: "Legal professionals need answers they can defend — not guesses. IST Legal combines AI with jurisdiction-specific legislation, case law, judicial decisions and regulatory materials, and every response is designed to support legal reasoning while encouraging verification.",
@@ -69,8 +72,8 @@ export const productPages: Record<string, DetailPage> = {
         { title: "Review supporting references", body: "Move from AI-assisted analysis back to the underlying legal authority." },
         { title: "Continue the conversation", body: "Refine the question as the legal issue develops." },
       ],
-      scene: "assistant",
-      caption: { title: "AI Legal Assistant", tag: "Rwanda · Labour law · Illustrative" },
+      scene: "categories",
+      caption: { title: "Practice areas", tag: "Choose the area of law" },
     },
     steps: {
       heading: "How it works",
@@ -114,8 +117,9 @@ export const productPages: Record<string, DetailPage> = {
       body: "Search legislation, case law, regulations and other legal materials using natural language from one research experience.",
       primary: startFree,
       secondary: bookDemo,
-      image: "/media/stills/law-firms.jpg",
     },
+    heroVariant: "product",
+    heroScene: { scene: "research", caption: "Legal Research", tag: "Rwanda · Illustrative" },
     statement: {
       label: "Research with confidence",
       text: "Legal research shouldn't require switching between multiple databases. IST Legal searches trusted legal sources from a single workspace, helping you locate relevant legislation, judicial decisions and legal principles faster.",
@@ -131,8 +135,8 @@ export const productPages: Record<string, DetailPage> = {
         { title: "AI-assisted analysis", body: "Understand why an authority may be relevant before opening the full source." },
         { title: "Verifiable references", body: "Continue directly into the authority supporting the analysis." },
       ],
-      scene: "research",
-      caption: { title: "Legal Research", tag: "Rwanda · Illustrative" },
+      scene: "citations",
+      caption: { title: "Sources & Verification", tag: "Illustrative" },
     },
     steps: {
       heading: "How it works",
@@ -169,8 +173,9 @@ export const productPages: Record<string, DetailPage> = {
       body: "Search judicial decisions by issue, facts or question and move beyond keyword matching to understand how courts have interpreted the law.",
       primary: startFree,
       secondary: bookDemo,
-      image: "/media/stills/government.jpg",
     },
+    heroVariant: "product",
+    heroScene: { scene: "caseLaw", caption: "Case Law", tag: "Illustrative judgment" },
     statement: {
       label: "Go beyond keyword search",
       text: "Understand how courts have interpreted the law, not just where keywords appear. AI helps identify the most relevant precedents and summarizes judicial reasoning — while the original judgment stays one click away.",
@@ -186,8 +191,8 @@ export const productPages: Record<string, DetailPage> = {
         { title: "Compare authorities", body: "Explore related decisions around the same question." },
         { title: "Open the original judgment", body: "Keep the source available throughout your research." },
       ],
-      scene: "caseLaw",
-      caption: { title: "Case Law", tag: "Illustrative judgment" },
+      scene: "citations",
+      caption: { title: "Supporting authorities", tag: "Illustrative" },
     },
     steps: {
       heading: "How it works",
@@ -224,8 +229,9 @@ export const productPages: Record<string, DetailPage> = {
       body: "Search legislation using natural language, identify relevant provisions and keep a clear route back to the original legal text.",
       primary: startFree,
       secondary: bookDemo,
-      image: "/media/stills/security.jpg",
     },
+    heroVariant: "product",
+    heroScene: { scene: "legislation", caption: "Legislation", tag: "Rwanda · Illustrative" },
     statement: {
       label: "Stay current with the law",
       text: "Locate applicable laws quickly using AI-powered search designed for legal professionals. AI summarizes lengthy statutes and highlights relevant provisions while preserving links to the original legal sources.",
@@ -241,8 +247,8 @@ export const productPages: Record<string, DetailPage> = {
         { title: "Understand lengthy language", body: "Use AI-assisted summaries before reading the full text." },
         { title: "Return to the original", body: "Keep the official wording in view to verify context." },
       ],
-      scene: "legislation",
-      caption: { title: "Legislation", tag: "Rwanda · Illustrative" },
+      scene: "research",
+      caption: { title: "Find the applicable law", tag: "Rwanda · Illustrative" },
     },
     steps: {
       heading: "How it works",
@@ -279,8 +285,9 @@ export const productPages: Record<string, DetailPage> = {
       body: "Use AI to help identify important clauses, obligations, risks and inconsistencies while keeping professional review at the centre of the process.",
       primary: startFree,
       secondary: bookDemo,
-      image: "/media/stills/education.jpg",
     },
+    heroVariant: "product",
+    heroScene: { scene: "contract", caption: "Contract Review", tag: "Illustrative contract" },
     statement: {
       label: "Reduce manual review",
       text: "Manual contract review is time-consuming and repetitive. IST Legal helps identify key clauses, obligations, risks and inconsistencies so legal professionals can focus on strategic judgment.",
@@ -296,8 +303,8 @@ export const productPages: Record<string, DetailPage> = {
         { title: "AI-assisted drafting", body: "Accelerate first drafts and revisions." },
         { title: "Professional oversight", body: "The lawyer stays in control of the final interpretation and document." },
       ],
-      scene: "contract",
-      caption: { title: "Contract Review", tag: "Illustrative contract" },
+      scene: "draft",
+      caption: { title: "Draft and export", tag: "Memo · Illustrative" },
     },
     steps: {
       heading: "How it works",
@@ -335,8 +342,9 @@ export const productPages: Record<string, DetailPage> = {
       body: "Support the processes surrounding matters, documents and recurring legal work with tools that extend IST Legal beyond research alone.",
       primary: bookDemo,
       secondary: startFree,
-      image: "/media/stills/businesses.jpg",
     },
+    heroVariant: "product",
+    heroScene: { scene: "matters", caption: "Matters & Workflows", tag: "Illustrative matter" },
     statement: {
       label: "Beyond research",
       text: "Research is only one part of legal work. IST Legal extends into the work around it — intake, documents, signing, recurring procedures, translation, chronology and shared legal knowledge.",
@@ -605,8 +613,8 @@ export const assurancePages: Record<string, DetailPage> = {
       body: "IST Legal keeps AI-assisted analysis connected to the legal authorities supporting it, so users can review the source and apply professional judgment.",
       primary: startFree,
       secondary: bookDemo,
-      image: "/media/stills/verification.jpg",
     },
+    heroVariant: "plain",
     statement: {
       label: "AI analysis is not the legal source",
       text: "IST Legal distinguishes AI-assisted explanation from the underlying legislation, case law and other legal authority. When supporting authority is available, references help you identify the legal material connected to the answer.",
@@ -633,7 +641,6 @@ export const assurancePages: Record<string, DetailPage> = {
       ],
     },
     band: {
-      image: "/media/stills/government.jpg",
       label: "Jurisdiction changes the answer",
       heading: "Legal systems differ",
       items: ["Built around jurisdiction-specific legal information", "No assumption that the same authority applies everywhere", "Sources tied to the law that applies to you"],
@@ -655,8 +662,8 @@ export const assurancePages: Record<string, DetailPage> = {
       body: "Legal information can be sensitive. IST Legal is designed with organizational access, privacy and responsible data handling in mind.",
       primary: { label: "Talk to Us About Security", href: "/book-a-demo" },
       secondary: startFree,
-      image: "/media/stills/security.jpg",
     },
+    heroVariant: "plain",
     statement: {
       label: "Our approach",
       text: "Security for legal work is about who can access what, how sensitive information is handled, and how organizations keep oversight. Specific controls, hosting and certifications are confirmed directly with our team for your requirements.",
@@ -672,7 +679,6 @@ export const assurancePages: Record<string, DetailPage> = {
       ],
     },
     band: {
-      image: "/media/stills/law-firms.jpg",
       label: "Deployment",
       heading: "Built for organizational use",
       items: ["Enterprise deployments and custom implementations", "Requirements reviewed with your team", "Questions about data handling answered directly"],
@@ -739,7 +745,7 @@ export const pricing = {
       featured: false,
     },
   ],
-  note: "Plan limits and prices are confirmed at sign-up or with our team — no surprise fees.",
+  note: "Plan limits and prices are confirmed at sign-up or with our team.",
   faq: [
     { q: "Can I try IST Legal before paying?", a: "Yes. You can get started before committing to an organizational plan. Exact limits depend on the current offering." },
     { q: "Do you offer team plans?", a: "Yes. IST Legal supports organizational use for legal teams and institutions — talk to us about your team." },

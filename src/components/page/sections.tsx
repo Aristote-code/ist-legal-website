@@ -26,7 +26,7 @@ export function DarkButton({ cta }: { cta: Cta }) {
 /** Large statement paragraph with optional "deliverables" chips (Elyte: The problem we solve). */
 export function Statement({ data }: { data: DetailPage["statement"] }) {
   return (
-    <section className="bg-bg-secondary px-2xl pb-[100px] pt-[120px]">
+    <section className="bg-bg-secondary px-2xl pb-[80px] pt-[120px] lg:pt-[160px]">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-3xl">
         <SectionLabel>{data.label}</SectionLabel>
         <p className="max-w-[1040px] text-[28px] leading-[1.25] tracking-[-0.04em] text-bg-dark lg:text-[40px] lg:leading-[1.2]">{data.text}</p>
@@ -42,7 +42,7 @@ export function Statement({ data }: { data: DetailPage["statement"] }) {
             </ul>
           </div>
         )}
-        <span className="mt-[60px] h-px w-full bg-line-dark" />
+        <span className="mt-[48px] h-px w-full bg-line-dark" />
       </div>
     </section>
   );
@@ -51,7 +51,7 @@ export function Statement({ data }: { data: DetailPage["statement"] }) {
 /** Numbered feature list beside a product scene (Figma Pillars, static). */
 export function FeatureBlock({ data }: { data: NonNullable<DetailPage["feature"]> }) {
   return (
-    <section className="bg-bg-secondary px-2xl pb-[120px]">
+    <section className="bg-bg-secondary px-2xl pb-[140px]">
       <div className="mx-auto grid max-w-[1160px] items-center gap-[60px] lg:grid-cols-2 lg:gap-5xl">
         <div className="flex flex-col gap-[44px]">
           <div className="flex flex-col gap-3xl">
@@ -87,7 +87,7 @@ export function FeatureBlock({ data }: { data: NonNullable<DetailPage["feature"]
 /** "How it works" — step rows on a white panel (Elyte service page). */
 export function StepsPanel({ data }: { data: NonNullable<DetailPage["steps"]> }) {
   return (
-    <section className="bg-bg-secondary px-2xl pb-[120px]">
+    <section className="bg-bg-secondary px-2xl pb-[64px]">
       <div className="mx-auto max-w-[1160px] bg-white px-xl py-[60px] sm:px-[48px] lg:px-[80px] lg:py-[80px]">
         <RevealHeading text={data.heading} className="mb-[48px]" />
         <ol>
@@ -109,10 +109,18 @@ export function StepsPanel({ data }: { data: NonNullable<DetailPage["steps"]> })
 /** Full-width still with a glass card listing outcomes and a white arrow tile. */
 export function ImageBand({ data }: { data: NonNullable<DetailPage["band"]> }) {
   return (
-    <section className="bg-bg-secondary px-2xl pb-[120px]">
-      <div className="relative mx-auto min-h-[600px] max-w-[1160px] overflow-hidden bg-bg-dark lg:min-h-[720px]">
-        <Image src={data.image} alt="" fill sizes="(min-width: 1200px) 1160px, 100vw" className="object-cover" />
-        <div className="relative flex min-h-[inherit] items-end bg-gradient-to-r from-bg-dark/85 via-bg-dark/40 to-transparent p-lg">
+    <section className="bg-bg-secondary px-2xl pb-[140px]">
+      <div className={`relative mx-auto max-w-[1160px] overflow-hidden bg-bg-dark ${data.image ? "min-h-[600px] lg:min-h-[720px]" : "min-h-[440px]"}`}>
+        {data.image ? (
+          <Image src={data.image} alt="" fill sizes="(min-width: 1200px) 1160px, 100vw" className="object-cover" />
+        ) : (
+          <div className="hero-noise absolute inset-0" />
+        )}
+        <div
+          className={`relative flex min-h-[inherit] p-lg ${
+            data.image ? "items-end bg-gradient-to-r from-bg-dark/85 via-bg-dark/40 to-transparent" : "items-center"
+          }`}
+        >
           <div className="flex w-full max-w-[482px] flex-col gap-3xl border border-white/8 bg-[rgba(8,16,20,0.12)] p-[28px] backdrop-blur-[5px] sm:p-[36px]">
             <SectionLabel light>{data.label}</SectionLabel>
             <h3 className="text-display-xs leading-[28.8px] tracking-[-0.96px] text-white">{data.heading}</h3>
@@ -135,7 +143,7 @@ export function ImageBand({ data }: { data: NonNullable<DetailPage["band"]> }) {
 /** Closing "who this is for" block. */
 export function WhoFor({ data }: { data: NonNullable<DetailPage["who"]> }) {
   return (
-    <section className="bg-bg-secondary px-2xl pb-[120px]">
+    <section className="bg-bg-secondary px-2xl pb-[160px]">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-3xl">
         <SectionLabel>{data.label}</SectionLabel>
         <RevealHeading text={data.heading} className="max-w-[860px]" />

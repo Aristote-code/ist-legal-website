@@ -12,7 +12,7 @@ export default function ResourcesPage() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
+      <main id="main" className="flex-1 bg-bg-secondary">
         <PageHero compact {...resources.hero} />
         <section className="px-2xl py-[120px]">
           <ul className="mx-auto grid max-w-[1160px] gap-[10px] sm:grid-cols-2 lg:grid-cols-3">
@@ -41,7 +41,7 @@ export default function ResourcesPage() {
           }}
         />
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

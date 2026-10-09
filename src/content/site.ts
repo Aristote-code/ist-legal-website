@@ -172,10 +172,10 @@ export const solutions = {
   heading: "One platform. Different kinds of legal work.",
   intro: "IST Legal adapts to the questions, documents and workflows different legal professionals work with every day.",
   items: [
-    { title: "Law Firms", cta: "For Law Firms", href: "/solutions/law-firms", image: "/media/stills/law-firms.jpg", description: "Research authorities, prepare matters, review documents and build more consistent legal work across the firm." },
-    { title: "Government", cta: "For Government", href: "/solutions/government", image: "/media/stills/government.jpg", description: "Support policy analysis, regulatory interpretation, compliance work and legal advisory functions." },
-    { title: "Businesses", cta: "For Businesses", href: "/solutions/businesses", image: "/media/stills/businesses.jpg", description: "Review commercial agreements, understand legal requirements and support procurement and compliance decisions." },
-    { title: "Education", cta: "For Education", href: "/solutions/education", image: "/media/stills/education.jpg", description: "Research legislation and case law, understand legal concepts and build stronger research habits." },
+    { title: "Law Firms", focus: "32% center", cta: "For Law Firms", href: "/solutions/law-firms", image: "/media/stills/law-firms.jpg", description: "Research authorities, prepare matters, review documents and build more consistent legal work across the firm." },
+    { title: "Government", focus: "50% center", cta: "For Government", href: "/solutions/government", image: "/media/stills/government.jpg", description: "Support policy analysis, regulatory interpretation, compliance work and legal advisory functions." },
+    { title: "Businesses", focus: "62% center", cta: "For Businesses", href: "/solutions/businesses", image: "/media/stills/businesses.jpg", description: "Review commercial agreements, understand legal requirements and support procurement and compliance decisions." },
+    { title: "Education", focus: "58% center", cta: "For Education", href: "/solutions/education", image: "/media/stills/education.jpg", description: "Research legislation and case law, understand legal concepts and build stronger research habits." },
   ],
 };
 

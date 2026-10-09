@@ -14,14 +14,14 @@ export default function PlatformPage() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
+      <main id="main" className="flex-1 bg-bg-secondary">
         <PageHero {...platformOverview.hero} />
         <PlatformShowcase />
         <Statement data={{ ...platformOverview.jurisdiction, chips: undefined }} />
         <WorkflowTools />
         <Assurance />
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

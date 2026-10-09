@@ -8,7 +8,7 @@
   --color-text-muted: #c8c8c8;
   --color-line: rgba(255, 255, 255, 0.12);
   --color-bg-secondary: #f2f3f5; /* menu panel */
-  --color-text-tertiary: #707070;
+  --color-text-tertiary: #6b6b6b; /* Figma #707070 is 4.46:1 on #F2F3F5; #6B6B6B passes AA (4.9:1) */
   --color-line-dark: rgba(8, 16, 20, 0.12);
 
   /* IST Legal app palette — used only inside product scenes */
@@ -45,6 +45,13 @@
 
 @theme inline {
   --font-sans: var(--font-certia);
+}
+
+/* Visible focus on light and dark surfaces: dark inner ring + white outer ring */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-bg-dark);
 }
 
 body {

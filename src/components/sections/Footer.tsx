@@ -6,10 +6,11 @@ import { footer } from "@/content/site";
 import { Logo } from "../Logo";
 import { ActionTile, CornerMark, RevealHeading, SectionLabel } from "../ui";
 
-export function Footer() {
+/** `compact` trims the cinematic runway for inner pages; the homepage keeps the full footer. */
+export function Footer({ compact = false }: { compact?: boolean }) {
   return (
-    <footer className="relative isolate overflow-hidden bg-bg-dark px-2xl pb-[60px] pt-[200px] lg:pt-[400px]">
-      <Image src={footer.image} alt="" fill sizes="100vw" className="-z-10 object-cover opacity-60 blur-[2px]" />
+    <footer className={`relative isolate overflow-hidden bg-bg-dark px-2xl pb-[60px] ${compact ? "pt-[100px] lg:pt-[140px]" : "pt-[200px] lg:pt-[400px]"}`}>
+      {!compact && <Image src={footer.image} alt="" fill sizes="100vw" className="-z-10 object-cover opacity-60 blur-[2px]" />}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-bg-dark/60 via-bg-dark/70 to-bg-dark" />
 
       <div className="mx-auto flex max-w-[1200px] flex-col gap-[50px]">

@@ -14,7 +14,7 @@ export default function BookDemoPage() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
+      <main id="main" className="flex-1 bg-bg-secondary">
         <PageHero compact {...bookDemoPage.hero} />
         <section className="px-2xl py-[120px]">
           <div className="mx-auto grid max-w-[1160px] gap-[60px] lg:grid-cols-[380px_1fr] lg:gap-[80px]">
@@ -44,7 +44,7 @@ export default function BookDemoPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

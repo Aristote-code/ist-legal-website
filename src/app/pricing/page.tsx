@@ -16,7 +16,7 @@ export default function PricingPage() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
+      <main id="main" className="flex-1 bg-bg-secondary">
         <PageHero compact {...pricing.hero} />
         <section className="px-2xl py-[120px]">
           <div className="mx-auto flex max-w-[1160px] flex-col gap-3xl">
@@ -55,7 +55,7 @@ export default function PricingPage() {
         </section>
         <Faq items={pricing.faq} heading="Pricing questions" />
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

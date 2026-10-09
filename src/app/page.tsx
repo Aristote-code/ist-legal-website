@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
+      <main id="main" className="flex-1 bg-bg-secondary">
         <Hero />
         <LogoStrip />
         <PlatformShowcase />

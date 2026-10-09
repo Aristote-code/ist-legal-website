@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
+      <main id="main" className="flex-1 bg-bg-secondary">
         <PageHero {...about.hero} primary={{ label: "Book a Demo", href: "/book-a-demo" }} secondary={{ label: "Explore the Platform", href: "/platform" }} />
         <Statement data={about.statement} />
         <section className="px-2xl pb-[120px]">
@@ -46,7 +46,7 @@ export default function AboutPage() {
           }}
         />
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

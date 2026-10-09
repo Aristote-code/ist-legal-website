@@ -20,7 +20,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${certia.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <a
+          href="#main"
+          className="sr-only z-50 bg-white px-2xl py-lg text-md font-medium text-bg-dark focus:not-sr-only focus:fixed focus:left-2xl focus:top-2xl"
+        >
+          Skip to main content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

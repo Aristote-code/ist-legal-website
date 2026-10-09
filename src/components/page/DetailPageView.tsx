@@ -12,8 +12,8 @@ export function DetailPageView({ page }: { page: DetailPage }) {
   return (
     <>
       <Navigation />
-      <main className="flex-1 bg-bg-secondary">
-        <PageHero {...page.hero} />
+      <main id="main" className="flex-1 bg-bg-secondary">
+        <PageHero {...page.hero} variant={page.heroVariant ?? "photo"} scene={page.heroScene} />
         <Statement data={page.statement} />
         {page.feature && <FeatureBlock data={page.feature} />}
         {page.steps && <StepsPanel data={page.steps} />}
@@ -26,7 +26,7 @@ export function DetailPageView({ page }: { page: DetailPage }) {
         {page.who && <WhoFor data={page.who} />}
         {page.faq && <Faq items={page.faq} heading="Questions you're probably asking" />}
       </main>
-      <Footer />
+      <Footer compact />
     </>
   );
 }

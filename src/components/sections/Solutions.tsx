@@ -8,7 +8,7 @@ import { CornerMark, RevealHeading, SectionLabel } from "../ui";
 
 export function Solutions() {
   return (
-    <section aria-labelledby="solutions-heading" className="bg-bg-secondary px-2xl py-[120px]">
+    <section aria-labelledby="solutions-heading" className="bg-bg-secondary px-2xl pb-[120px] pt-[140px]">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-[50px]">
         <div className="flex flex-col gap-3xl">
           <SectionLabel>{solutions.label}</SectionLabel>
@@ -28,6 +28,7 @@ export function Solutions() {
                   fill
                   sizes="(min-width: 1024px) 290px, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  style={{ objectPosition: item.focus }}
                 />
                 <span className="absolute inset-0 bg-gradient-to-b from-[rgba(8,16,20,0.4)] from-[43.6%] to-bg-dark" />
                 {/* Title rolls up on hover (Figma's duplicated heading layer) */}

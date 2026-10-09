@@ -7,7 +7,7 @@ import { RevealHeading, SectionLabel } from "../ui";
 
 export function WorkflowTools() {
   return (
-    <section aria-labelledby="tools-heading" className="bg-bg-secondary px-2xl pt-[120px]">
+    <section aria-labelledby="tools-heading" className="bg-bg-secondary px-2xl pt-[100px]">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-[100px]">
         <div className="flex flex-col gap-3xl">
           <SectionLabel>{workflowTools.label}</SectionLabel>

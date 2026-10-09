@@ -9,7 +9,7 @@ import { ActionTile, RevealHeading, SectionLabel } from "../ui";
 
 export function Assurance() {
   return (
-    <section aria-labelledby="assurance-heading" className="bg-bg-secondary px-2xl py-[120px]">
+    <section aria-labelledby="assurance-heading" className="bg-bg-secondary px-2xl pb-[120px] pt-[160px]">
       <div className="mx-auto flex max-w-[1160px] flex-col items-center gap-[44px]">
         <div className="flex flex-col items-center gap-3xl text-center">
           <SectionLabel>{assurance.label}</SectionLabel>
