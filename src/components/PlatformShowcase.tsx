@@ -21,12 +21,18 @@ const captionIcon: Record<SceneName, IconName> = {
   citations: "verification",
   draft: "contract",
   intake: "workflow",
+  research: "research",
+  caseLaw: "caseLaw",
+  legislation: "legislation",
+  contract: "contract",
+  matters: "workflow",
 };
 
 type Feature = (typeof platform.features)[number];
+export type SceneItem = { scene: SceneName; caption: string; tag: string; href?: string };
 
 /** Dark frame (560×565 in Figma) holding one or more scenes plus the caption bar. */
-function SceneFrame({ features, active }: { features: readonly Feature[]; active: number }) {
+export function SceneFrame({ features, active = 0 }: { features: readonly SceneItem[]; active?: number }) {
   const areaRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -69,23 +75,33 @@ function SceneFrame({ features, active }: { features: readonly Feature[]; active
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(8,16,20,0)] from-60% to-bg-dark" />
 
       {/* Caption bar (Figma's person card → feature card) */}
-      <Link
-        href={current.href}
-        className="group absolute inset-x-md bottom-md flex items-center gap-2xl bg-white/12 p-xl backdrop-blur-[5px]"
-      >
-        <span className="flex size-[60px] shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
-          <Icon name={captionIcon[current.scene]} />
-        </span>
-        <span className="flex min-w-0 flex-1 flex-col gap-[10px]">
-          <span className="truncate text-xl leading-[24px] tracking-[-0.4px] text-white">{current.caption}</span>
-          <span className="text-xs font-medium uppercase leading-[16.8px] tracking-[0.72px] text-text-muted sm:truncate">{current.tag}</span>
-        </span>
-        <span className="hidden shrink-0 items-center gap-[10px] sm:flex">
-          <span className="text-md font-medium leading-[22.4px] text-white">Explore</span>
-          <CornerMark variant="bare" dark />
-        </span>
-      </Link>
+      <CaptionBar item={current} />
     </div>
+  );
+}
+
+function CaptionBar({ item }: { item: SceneItem }) {
+  const inner = (
+    <>
+      <span className="flex size-[60px] shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
+        <Icon name={captionIcon[item.scene]} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col gap-[10px]">
+        <span className="truncate text-xl leading-[24px] tracking-[-0.4px] text-white">{item.caption}</span>
+        <span className="text-xs font-medium uppercase leading-[16.8px] tracking-[0.72px] text-text-muted sm:truncate">{item.tag}</span>
+      </span>
+    </>
+  );
+  const cls = "absolute inset-x-md bottom-md flex items-center gap-2xl bg-white/12 p-xl backdrop-blur-[5px]";
+  if (!item.href) return <div className={cls}>{inner}</div>;
+  return (
+    <Link href={item.href} className={`group ${cls}`}>
+      {inner}
+      <span className="hidden shrink-0 items-center gap-[10px] sm:flex">
+        <span className="text-md font-medium leading-[22.4px] text-white">Explore</span>
+        <CornerMark variant="bare" dark />
+      </span>
+    </Link>
   );
 }
 

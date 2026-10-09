@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
@@ -65,24 +67,37 @@ export function RevealHeading({
 }
 
 /**
- * Figma's corner mark: a dark 20px square that slides out on hover while a second
- * one slides in from the bottom-left. Parent needs the `group` class.
- * `box` = white 52px tile (cards); `bare` = just the 20px mark (tiles, links).
+ * Corner arrow (Elyte's ↗ — Figma exports it as a black square). On hover the
+ * arrow slides out to the top-right while a second one slides in from the
+ * bottom-left. Parent needs the `group` class.
+ * `box` = white 52px tile in a card corner; `bare` = just the 20px arrow.
  */
+function Arrow({ className = "" }: { className?: string }) {
+  return (
+    <HugeiconsIcon
+      icon={ArrowUpRight01Icon}
+      size={20}
+      color="currentColor"
+      strokeWidth={1.8}
+      aria-hidden
+      className={`absolute transition-transform duration-500 ease-out ${className}`}
+    />
+  );
+}
+
 export function CornerMark({ variant = "box", dark = false }: { variant?: "box" | "bare"; dark?: boolean }) {
-  const sq = dark ? "bg-white" : "bg-bg-dark";
   if (variant === "bare") {
     return (
-      <span aria-hidden className="relative block size-[20px] shrink-0 overflow-clip">
-        <span className={`absolute left-0 top-0 size-[20px] ${sq} transition-transform duration-500 ease-out group-hover:translate-x-[24px] group-hover:-translate-y-[24px]`} />
-        <span className={`absolute left-[-24px] top-[24px] size-[20px] ${sq} transition-transform duration-500 ease-out group-hover:translate-x-[24px] group-hover:-translate-y-[24px]`} />
+      <span aria-hidden className={`relative block size-[20px] shrink-0 overflow-clip ${dark ? "text-white" : "text-bg-dark"}`}>
+        <Arrow className="left-0 top-0 group-hover:translate-x-[24px] group-hover:-translate-y-[24px]" />
+        <Arrow className="left-[-24px] top-[24px] group-hover:translate-x-[24px] group-hover:-translate-y-[24px]" />
       </span>
     );
   }
   return (
-    <span aria-hidden className="absolute right-0 top-0 size-[52px] overflow-clip bg-white">
-      <span className="absolute left-[16px] top-[16px] size-[20px] bg-bg-dark transition-transform duration-500 ease-out group-hover:translate-x-[40px] group-hover:-translate-y-[40px]" />
-      <span className="absolute left-[-24px] top-[56px] size-[20px] bg-bg-dark transition-transform duration-500 ease-out group-hover:translate-x-[40px] group-hover:-translate-y-[40px]" />
+    <span aria-hidden className="absolute right-0 top-0 size-[52px] overflow-clip bg-white text-bg-dark">
+      <Arrow className="left-[16px] top-[16px] group-hover:translate-x-[40px] group-hover:-translate-y-[40px]" />
+      <Arrow className="left-[-24px] top-[56px] group-hover:translate-x-[40px] group-hover:-translate-y-[40px]" />
     </span>
   );
 }

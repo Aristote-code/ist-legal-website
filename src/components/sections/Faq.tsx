@@ -17,23 +17,31 @@ function PlusMinus({ open }: { open: boolean }) {
   );
 }
 
-export function Faq() {
+export function Faq({
+  items = faq.items,
+  label = faq.label,
+  heading = faq.heading,
+}: {
+  items?: readonly { q: string; a: string }[];
+  label?: string;
+  heading?: string;
+} = {}) {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section aria-labelledby="faq-heading" className="bg-bg-secondary px-2xl pb-[120px] pt-[112px] lg:pb-11xl">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-[60px] lg:flex-row lg:items-stretch lg:gap-[112px]">
         <div className="flex flex-col justify-between gap-[60px] lg:max-w-[494px] lg:flex-[494_0_0]">
           <div className="flex flex-col gap-3xl">
-            <SectionLabel>{faq.label}</SectionLabel>
+            <SectionLabel>{label}</SectionLabel>
             <div id="faq-heading">
-              <RevealHeading text={faq.heading} className="max-w-[494px]" />
+              <RevealHeading text={heading} className="max-w-[494px]" />
             </div>
           </div>
           <ActionTile href={faq.contact.href} title={faq.contact.title} body={faq.contact.body} className="h-[150px] w-full p-2xl" />
         </div>
 
         <ul className="flex flex-col gap-[34px] lg:flex-[554_0_0]">
-          {faq.items.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = open === i;
             return (
               <li key={item.q} className={`border-b pb-4xl transition-colors duration-500 ${isOpen ? "border-bg-dark" : "border-line-dark"}`}>

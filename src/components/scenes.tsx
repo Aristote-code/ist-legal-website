@@ -5,14 +5,19 @@ import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import {
   ArrowUp02Icon,
   Attachment01Icon,
+  Alert02Icon,
+  ArrowDown01Icon,
   Briefcase01Icon,
   Building03Icon,
+  Calendar03Icon,
   CheckmarkCircle02Icon,
   Copy01Icon,
   CourtHouseIcon,
   Download04Icon,
   FavouriteIcon,
   File02Icon,
+  FilterHorizontalIcon,
+  Folder01Icon,
   JusticeScale01Icon,
   LinkSquare02Icon,
   Search01Icon,
@@ -21,7 +26,17 @@ import {
   Upload04Icon,
 } from "@hugeicons/core-free-icons";
 
-export type SceneName = "assistant" | "categories" | "citations" | "draft" | "intake";
+export type SceneName =
+  | "assistant"
+  | "categories"
+  | "citations"
+  | "draft"
+  | "intake"
+  | "research"
+  | "caseLaw"
+  | "legislation"
+  | "contract"
+  | "matters";
 
 function I({ icon, size = 14, className = "" }: { icon: IconSvgElement; size?: number; className?: string }) {
   return <HugeiconsIcon icon={icon} size={size} color="currentColor" strokeWidth={1.6} className={className} aria-hidden />;
@@ -312,10 +327,263 @@ function IntakeScene() {
   );
 }
 
+/* Shared bits for the new scenes */
+function Lines({ widths, accent }: { widths: number[]; accent?: number[] }) {
+  return (
+    <div className="flex flex-col gap-[6px]">
+      {widths.map((w, i) => (
+        <span key={i} className={`block h-[5px] rounded-full ${accent?.includes(i) ? "bg-app-primary-100" : "bg-app-line"}`} style={{ width: `${w}%` }} />
+      ))}
+    </div>
+  );
+}
+
+function TypeTag({ children, tone = "primary" }: { children: React.ReactNode; tone?: "primary" | "neutral" | "amber" }) {
+  const cls =
+    tone === "primary"
+      ? "bg-app-primary-50 text-app-primary"
+      : tone === "amber"
+        ? "bg-[#fef3c7] text-[#b45309]"
+        : "bg-app-input text-app-muted";
+  return <span className={`inline-flex items-center rounded-md px-1.5 py-[2px] text-[9.5px] font-medium ${cls}`}>{children}</span>;
+}
+
+/* II — Legal Research */
+function ResearchScene() {
+  const results = [
+    { type: "Legislation", title: "Law N° 66/2018 regulating labour in Rwanda", note: "Provisions on termination and notice", active: true },
+    { type: "Case law", title: "Illustrative judgment — Employee v. Employer", note: "Notice and termination without cause", active: false },
+    { type: "Regulation", title: "Illustrative implementing regulation", note: "Procedure for termination", active: false },
+  ];
+  return (
+    <Window title="Research">
+      <div className="flex h-full flex-col bg-[#fafafa]">
+        <div className="border-b border-app-line bg-white px-4 py-3">
+          <div className="flex items-center gap-2 rounded-xl border border-app-line px-3 py-2 text-[11.5px]">
+            <span className="text-app-muted">
+              <I icon={Search01Icon} size={13} />
+            </span>
+            Notice required to end an employment contract
+          </div>
+          <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px]">
+            <span className="inline-flex items-center gap-1 rounded-lg border border-app-line px-2 py-1">
+              Jurisdiction: Rwanda <I icon={ArrowDown01Icon} size={10} />
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-lg border border-app-primary bg-app-primary-50 px-2 py-1 text-app-primary">Legislation</span>
+            <span className="inline-flex items-center gap-1 rounded-lg border border-app-primary bg-app-primary-50 px-2 py-1 text-app-primary">Case law</span>
+            <span className="inline-flex items-center gap-1 rounded-lg border border-app-line px-2 py-1 text-app-muted">Regulations</span>
+            <span className="ml-auto text-app-muted">
+              <I icon={FilterHorizontalIcon} size={13} />
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col gap-2 p-4">
+          <p className="text-[10px] text-app-muted">3 relevant sources</p>
+          {results.map((r) => (
+            <div
+              key={r.title}
+              className={`rounded-xl border bg-white p-3 ${r.active ? "border-app-primary shadow-[0_6px_18px_-10px_rgba(78,51,217,0.5)]" : "border-app-line"}`}
+            >
+              <div className="mb-1.5 flex items-center gap-2">
+                <TypeTag tone={r.type === "Legislation" ? "primary" : "neutral"}>{r.type}</TypeTag>
+                <span className="truncate text-[11.5px] font-medium">{r.title}</span>
+              </div>
+              <p className="mb-2 text-[10.5px] text-app-muted">{r.note}</p>
+              <Lines widths={r.active ? [96, 88, 70] : [92, 64]} accent={r.active ? [1] : []} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+/* III — Case Law */
+function CaseLawScene() {
+  const tabs = ["Overview", "Facts", "Reasoning", "Decision"];
+  return (
+    <Window title="Case law  ›  Judgment">
+      <div className="flex h-full flex-col">
+        <div className="border-b border-app-line px-5 pb-3 pt-4">
+          <TypeTag>Illustrative judgment</TypeTag>
+          <p className="mt-1.5 text-[14px] font-medium">Employee v. Employer</p>
+          <p className="mt-0.5 text-[10.5px] text-app-muted">Labour dispute · Termination and notice</p>
+          <div className="mt-3 flex gap-4 text-[11px]">
+            {tabs.map((t) => (
+              <span key={t} className={`pb-1 ${t === "Reasoning" ? "border-b-2 border-app-primary font-medium text-app-primary" : "text-app-muted"}`}>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col gap-3 bg-[#fafafa] p-5">
+          <div className="rounded-xl border border-app-line bg-white p-3.5">
+            <p className="mb-2 flex items-center gap-1.5 text-[11px] font-medium">
+              <span className="flex size-[18px] items-center justify-center rounded-md bg-app-primary-50 text-app-primary">
+                <I icon={JusticeScale01Icon} size={11} />
+              </span>
+              AI summary of the reasoning
+            </p>
+            <ul className="flex flex-col gap-1.5 text-[11px] leading-snug text-app-ink">
+              <li>• The court examined whether notice was given before termination.</li>
+              <li>• It weighed the contract terms against the applicable statute.</li>
+              <li>• It considered whether an exception to notice applied.</li>
+            </ul>
+          </div>
+          <div className="rounded-xl border border-app-line bg-white p-3.5">
+            <p className="mb-2 text-[10.5px] text-app-muted">Relevant passage</p>
+            <Lines widths={[94, 86, 90, 60]} accent={[1, 2]} />
+          </div>
+          <span className="mt-auto inline-flex items-center gap-1.5 self-start rounded-xl bg-app-primary px-3 py-2 text-[11px] font-medium text-white">
+            View original judgment <I icon={LinkSquare02Icon} size={12} />
+          </span>
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+/* IV — Legislation */
+function LegislationScene() {
+  return (
+    <Window title="Legislation">
+      <div className="flex h-full flex-col">
+        <div className="flex items-center gap-1.5 border-b border-app-line px-4 py-2.5 text-[10.5px] text-app-muted">
+          <span className="font-medium text-app-ink">Law N° 66/2018</span> › Termination of contract › Notice
+          <span className="ml-auto">
+            <TypeTag>Rwanda</TypeTag>
+          </span>
+        </div>
+        <div className="flex flex-1">
+          <div className="flex w-[56%] flex-col gap-3 border-r border-app-line p-4">
+            <p className="text-[10px] font-medium uppercase tracking-[0.06em] text-app-muted">Original text</p>
+            <Lines widths={[96, 92, 88, 94, 70]} />
+            <div className="rounded-lg bg-app-primary-50 p-2.5">
+              <Lines widths={[94, 90, 76]} accent={[0, 1, 2]} />
+            </div>
+            <Lines widths={[90, 84, 62]} />
+          </div>
+          <div className="flex flex-1 flex-col gap-2.5 bg-[#fafafa] p-4">
+            <p className="flex items-center gap-1.5 text-[11px] font-medium">
+              <span className="flex size-[18px] items-center justify-center rounded-md bg-app-primary-50 text-app-primary">
+                <I icon={JusticeScale01Icon} size={11} />
+              </span>
+              IST Legal explanation
+            </p>
+            <p className="text-[11px] leading-[1.5] text-app-ink">
+              The highlighted provision sets out when notice is required and how its length is determined. Read it together with the
+              employment contract.
+            </p>
+            <p className="mt-auto text-[10px] leading-snug text-app-muted">The source text stays visible — verify the wording before relying on it.</p>
+          </div>
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+/* V — Contract Review */
+function ContractScene() {
+  return (
+    <Window title="Review  ›  Employment agreement">
+      <div className="flex h-full">
+        <div className="flex w-[54%] flex-col gap-3 border-r border-app-line bg-[#fafafa] p-4">
+          <p className="text-[12px] font-medium">Employment Agreement</p>
+          {["7. Remuneration", "8. Termination", "9. Confidentiality"].map((c) => {
+            const flagged = c.startsWith("8");
+            return (
+              <div key={c} className={`rounded-lg p-2.5 ${flagged ? "border border-app-primary bg-white" : ""}`}>
+                <p className="mb-1.5 text-[10.5px] font-medium">{c}</p>
+                <Lines widths={flagged ? [94, 88, 80] : [92, 70]} accent={flagged ? [1] : []} />
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex flex-1 flex-col gap-2.5 p-4">
+          <p className="text-[11px] font-medium">Review</p>
+          <div className="rounded-xl border border-app-line p-3">
+            <p className="mb-1 text-[11px] font-medium">Clause 8.2 — Termination</p>
+            <div className="mb-2 flex flex-wrap gap-1">
+              <TypeTag tone="amber">
+                <span className="mr-0.5">
+                  <I icon={Alert02Icon} size={10} />
+                </span>
+                Potential issue
+              </TypeTag>
+              <TypeTag>Obligation</TypeTag>
+            </div>
+            <p className="text-[10.5px] leading-snug text-app-muted">Check the notice period against the applicable law.</p>
+          </div>
+          <div className="rounded-xl border border-app-line p-3">
+            <p className="mb-1 text-[11px] font-medium">Suggested review</p>
+            <p className="text-[10.5px] leading-snug text-app-muted">Confirm the notice terms with the client before finalising.</p>
+          </div>
+          <div className="mt-auto flex gap-1.5">
+            <span className="rounded-lg bg-app-primary px-2.5 py-1.5 text-[10.5px] font-medium text-white">Accept</span>
+            <span className="rounded-lg border border-app-line px-2.5 py-1.5 text-[10.5px]">Edit draft</span>
+          </div>
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+/* VI — Matters & Workflows */
+function MattersScene() {
+  const tabs = ["Overview", "Documents", "Timeline", "Research", "Tasks"];
+  const events = [
+    { day: "Day 1", title: "Client intake submitted", icon: Folder01Icon },
+    { day: "Day 3", title: "Employment agreement uploaded", icon: File02Icon },
+    { day: "Day 6", title: "Correspondence added", icon: File02Icon },
+    { day: "Day 9", title: "Research completed · 2 authorities", icon: Search01Icon },
+    { day: "Day 14", title: "Draft response prepared", icon: Calendar03Icon },
+  ];
+  return (
+    <Window title="Matters">
+      <div className="flex h-full flex-col">
+        <div className="border-b border-app-line px-5 pb-0 pt-4">
+          <div className="flex items-center gap-2">
+            <p className="text-[13px] font-medium">Employment dispute</p>
+            <TypeTag>Illustrative matter</TypeTag>
+          </div>
+          <div className="mt-3 flex gap-4 text-[11px]">
+            {tabs.map((t) => (
+              <span key={t} className={`pb-2 ${t === "Timeline" ? "border-b-2 border-app-primary font-medium text-app-primary" : "text-app-muted"}`}>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <ol className="relative flex flex-1 flex-col gap-3 bg-[#fafafa] p-5 pl-7">
+          <span className="absolute bottom-6 left-[37px] top-7 w-px bg-app-line" />
+          {events.map((e, i) => (
+            <li key={e.day} className="relative flex items-center gap-3">
+              <span
+                className={`relative z-10 flex size-[22px] shrink-0 items-center justify-center rounded-full ${
+                  i === events.length - 1 ? "bg-app-primary text-white" : "border border-app-line bg-white text-app-muted"
+                }`}
+              >
+                <I icon={e.icon} size={11} />
+              </span>
+              <span className="w-[44px] shrink-0 text-[10px] text-app-muted">{e.day}</span>
+              <span className="flex-1 rounded-lg border border-app-line bg-white px-3 py-2 text-[11px]">{e.title}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Window>
+  );
+}
+
 export const scenes: Record<SceneName, () => React.ReactElement> = {
   assistant: AssistantScene,
   categories: CategoriesScene,
   citations: CitationsScene,
   draft: DraftScene,
   intake: IntakeScene,
+  research: ResearchScene,
+  caseLaw: CaseLawScene,
+  legislation: LegislationScene,
+  contract: ContractScene,
+  matters: MattersScene,
 };

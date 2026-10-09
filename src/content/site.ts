@@ -1,13 +1,14 @@
 // Site copy. Source: IST_Legal_Website_Copy_Merged.docx + the frozen content architecture.
 
 import type { IconName } from "@/components/icons";
+import { APP_URL } from "./pages";
 
 export type NavItem = { label: string; href: string };
 export type MenuItem = NavItem & { description: string; icon: IconName };
 export type NavMenu = {
   label: string;
   items: MenuItem[];
-  card: { title: string; body: string; href: string };
+  card: { title: string; body: string; href: string; image: string };
 };
 
 export const nav = {
@@ -26,6 +27,7 @@ export const nav = {
         title: "Platform overview",
         body: "One legal workspace — from research to action. See how every part of IST Legal connects.",
         href: "/platform",
+        image: "/media/stills/verification.jpg",
       },
     },
     {
@@ -40,18 +42,20 @@ export const nav = {
         title: "Book a Demo",
         body: "See IST Legal in the context of your legal work — firm, institution, business or classroom.",
         href: "/book-a-demo",
+        image: "/media/stills/law-firms.jpg",
       },
     },
     {
       label: "Assurance",
       items: [
-        { label: "Sources & Verification", href: "/trust/verification", icon: "verification", description: "Every legal answer should lead you back to the law." },
-        { label: "Security & Privacy", href: "/trust/security", icon: "security", description: "Designed for the expectations of professional legal work." },
+        { label: "Sources & Verification", href: "/assurance/verification", icon: "verification", description: "Every legal answer should lead you back to the law." },
+        { label: "Security & Privacy", href: "/assurance/security", icon: "security", description: "Designed for the expectations of professional legal work." },
       ],
       card: {
         title: "AI you can verify",
         body: "IST Legal keeps AI analysis connected to the legal authorities behind it, so judgment stays with you.",
-        href: "/trust/verification",
+        href: "/assurance/verification",
+        image: "/media/stills/approach.jpg",
       },
     },
   ] satisfies NavMenu[],
@@ -59,9 +63,8 @@ export const nav = {
     { label: "Pricing", href: "/pricing" },
     { label: "Resources", href: "/resources" },
   ] satisfies NavItem[],
-  signIn: { label: "Sign in", href: "/sign-in" },
+  signIn: { label: "Sign in", href: APP_URL },
   cta: { label: "Book a Demo", href: "/book-a-demo" },
-  cardImage: "/media/menu/card.png",
 };
 
 export const hero = {
@@ -70,7 +73,7 @@ export const hero = {
     ["you", "can", "verify."],
   ],
   body: "Research legislation, case law and legal documents with AI grounded in jurisdiction-specific legal sources.",
-  primaryCta: { label: "Start Free", href: "/sign-up" },
+  primaryCta: { label: "Start Free", href: APP_URL },
   secondaryCta: { label: "Book a Demo", href: "/book-a-demo" },
   strip: ["Grounded in legal sources", "Verify every authority"],
   // Background film: 30s silent loop, transcoded from the supplied source (HEVC 39MB).
@@ -108,8 +111,8 @@ export const platform = {
   features: [
     {
       numeral: "I",
-      title: "Ask in plain language",
-      description: "Describe the issue the way you would to a colleague. IST Legal works from jurisdiction-specific legal sources.",
+      title: "AI Legal Assistant",
+      description: "Ask legal questions. Get answers you can trace — with the supporting authorities within reach.",
       caption: "AI Legal Assistant",
       tag: "Rwanda · Labour law · Illustrative",
       href: "/platform/ai-legal-assistant",
@@ -117,39 +120,48 @@ export const platform = {
     },
     {
       numeral: "II",
-      title: "Work by area of law",
-      description: "Choose from ten practice areas — from constitutional to contract law — so every answer starts in the right context.",
-      caption: "Practice areas",
-      tag: "10 areas of law",
-      href: "/platform",
-      scene: "categories",
+      title: "Legal Research",
+      description: "Find the right authority faster. Search legal sources in the language of the problem, not just keywords.",
+      caption: "Legal Research",
+      tag: "Rwanda · Illustrative",
+      href: "/platform/legal-research",
+      scene: "research",
     },
     {
       numeral: "III",
-      title: "Answers you can verify",
-      description: "Analysis stays connected to the authorities behind it. Open the source and apply your own judgment.",
-      caption: "Sources & Verification",
-      tag: "Illustrative",
-      href: "/trust/verification",
-      scene: "citations",
+      title: "Case Law",
+      description: "Find precedent. Understand the reasoning — and open the original judgment whenever you need it.",
+      caption: "Case Law",
+      tag: "Illustrative judgment",
+      href: "/platform/case-law",
+      scene: "caseLaw",
     },
     {
       numeral: "IV",
-      title: "Draft and export",
-      description: "Turn research into a structured memo or document and export it straight to Word.",
-      caption: "Contract Review & Drafting",
-      tag: "Memo · Export to Word",
-      href: "/platform/contract-review",
-      scene: "draft",
+      title: "Legislation",
+      description: "Find the law. Understand the provision — with the original legal text kept in view.",
+      caption: "Legislation",
+      tag: "Rwanda · Illustrative",
+      href: "/platform/legislation",
+      scene: "legislation",
     },
     {
       numeral: "V",
-      title: "Client intake",
-      description: "Clients submit their matter and receive a clear list of the documents your team needs.",
+      title: "Contract Review & Drafting",
+      description: "Review faster. Draft with more control — clauses, obligations and risks surfaced for your review.",
+      caption: "Contract Review & Drafting",
+      tag: "Illustrative contract",
+      href: "/platform/contract-review",
+      scene: "contract",
+    },
+    {
+      numeral: "VI",
+      title: "Matters & Workflows",
+      description: "Keep the work around the answer moving — documents, chronology and research around a matter.",
       caption: "Workflow Tools",
-      tag: "Client portal · Illustrative",
+      tag: "Illustrative matter",
       href: "/platform/workflow-tools",
-      scene: "intake",
+      scene: "matters",
     },
   ],
 } as const;
@@ -196,7 +208,7 @@ export const assurance = {
         { title: "Verification is part of the workflow", body: "Inspect the basis of an answer instead of treating it as final." },
         { title: "Professional judgment stays in control", body: "IST Legal supports legal reasoning; it does not replace the professional." },
       ],
-      link: { label: "How verification works", href: "/trust/verification" },
+      link: { label: "How verification works", href: "/assurance/verification" },
       image: "/media/stills/verification.jpg",
     },
     {
@@ -205,11 +217,11 @@ export const assurance = {
       title: "Designed for sensitive legal work",
       body: "Legal information is sensitive. IST Legal is designed with organisational access, privacy and responsible data handling in mind. Talk to us about your security and deployment requirements.",
       principles: [],
-      link: { label: "Security & Privacy", href: "/trust/security" },
+      link: { label: "Security & Privacy", href: "/assurance/security" },
       image: "/media/stills/security.jpg",
     },
   ],
-  more: { label: "Explore Assurance", href: "/trust/verification" },
+  more: { label: "Explore Assurance", href: "/assurance/verification" },
 } as const;
 
 // Section 7 — how it works (Figma "Our approach" 6:1278)
@@ -217,7 +229,7 @@ export const howItWorks = {
   label: "How it works",
   heading: "From question to authority",
   image: "/media/stills/approach.jpg",
-  cta: { label: "Start Free", href: "/sign-up" },
+  cta: { label: "Start Free", href: APP_URL },
   closing: "AI should help you reach the law faster — not separate you from it.",
   steps: [
     { title: "Ask", body: "Start with the legal question, issue or document — in plain language, in the right area of law." },
@@ -248,8 +260,8 @@ export const footer = {
   heading: "Work smarter. Research faster. Practice with confidence.",
   body: "Experience legal intelligence built around the sources, documents and workflows serious legal work depends on.",
   image: "/media/stills/footer.jpg",
-  updates: { title: "Sign up for updates", note: "Email updates are coming soon. In the meantime, book a demo to talk to our team." },
-  cta: { label: "Start Free", href: "/sign-up" },
+  updates: { title: "Stay up to date with IST Legal", body: "Product updates are coming soon.", cta: { label: "Book a Demo", href: "/book-a-demo" } },
+  cta: { label: "Start Free", href: APP_URL },
   contact: { email: "support@ist-legal.rw", phone: "+250 795 586 192" },
   columns: [
     { title: "Platform", links: [
@@ -267,8 +279,8 @@ export const footer = {
       { label: "Education", href: "/solutions/education" },
     ] },
     { title: "Assurance", links: [
-      { label: "Sources & Verification", href: "/trust/verification" },
-      { label: "Security & Privacy", href: "/trust/security" },
+      { label: "Sources & Verification", href: "/assurance/verification" },
+      { label: "Security & Privacy", href: "/assurance/security" },
     ] },
     { title: "Resources", links: [
       { label: "User Guide", href: "/resources" },
@@ -279,8 +291,8 @@ export const footer = {
       { label: "Contact", href: "/book-a-demo" },
     ] },
     { title: "Account", links: [
-      { label: "Sign In", href: "/sign-in" },
-      { label: "Start Free", href: "/sign-up" },
+      { label: "Sign In", href: APP_URL },
+      { label: "Start Free", href: APP_URL },
       { label: "Book a Demo", href: "/book-a-demo" },
     ] },
   ],

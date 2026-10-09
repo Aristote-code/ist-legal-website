@@ -1,18 +1,12 @@
-"use client";
-
 // Footer. Layout from Figma (6:1601): dark photo background, CTA heading + paragraph,
-// "Sign up for updates" bar with a white tile, white link panel, logo + copyright.
+// "Stay up to date" bar (no mailing list yet, so no fake form) with a white tile, white link panel, logo + copyright.
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { footer } from "@/content/site";
 import { Logo } from "../Logo";
-import { ActionTile, RevealHeading, SectionLabel } from "../ui";
+import { ActionTile, CornerMark, RevealHeading, SectionLabel } from "../ui";
 
 export function Footer() {
-  // No mailing list exists yet, so the form says so instead of pretending to subscribe.
-  const [submitted, setSubmitted] = useState(false);
-
   return (
     <footer className="relative isolate overflow-hidden bg-bg-dark px-2xl pb-[60px] pt-[200px] lg:pt-[400px]">
       <Image src={footer.image} alt="" fill sizes="100vw" className="-z-10 object-cover opacity-60 blur-[2px]" />
@@ -29,45 +23,19 @@ export function Footer() {
 
         <div className="flex flex-col gap-[10px]">
           <div className="flex flex-col gap-[10px] md:flex-row">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-              className="flex flex-col gap-2xl bg-bg-secondary px-xl py-xl md:flex-1 md:flex-row md:gap-5xl md:px-4xl"
-            >
-              <label htmlFor="footer-email" className="shrink-0 text-xl leading-[24px] tracking-[-0.4px] text-bg-dark md:pt-[10px]">
-                {footer.updates.title}
-              </label>
-              <div className="flex flex-1 flex-col gap-md">
-                <div className="relative">
-                  <input
-                    id="footer-email"
-                    type="email"
-                    required
-                    placeholder="name@email.com"
-                    className="h-[61px] w-full bg-white py-2xl pl-2xl pr-[140px] text-md text-bg-dark outline-none placeholder:text-text-tertiary focus-visible:outline-2 focus-visible:outline-bg-dark"
-                  />
-                  <button
-                    type="submit"
-                    className="absolute right-[5px] top-[5px] h-[51px] w-[120px] bg-bg-dark text-md font-medium text-white transition-opacity hover:opacity-90"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-                <p className="text-sm leading-[19.6px] text-text-tertiary" role="status">
-                  {submitted ? footer.updates.note : (
-                    <>
-                      By subscribing you agree to our{" "}
-                      <Link href="/privacy" className="underline">
-                        Privacy Policy
-                      </Link>
-                      .
-                    </>
-                  )}
-                </p>
+            <div className="flex flex-col gap-xl bg-bg-secondary px-xl py-2xl md:flex-1 md:flex-row md:items-center md:justify-between md:gap-5xl md:px-4xl">
+              <div className="flex flex-col gap-xs">
+                <p className="text-xl leading-[24px] tracking-[-0.4px] text-bg-dark">{footer.updates.title}</p>
+                <p className="text-sm leading-[19.6px] text-text-tertiary">{footer.updates.body}</p>
               </div>
-            </form>
+              <Link
+                href={footer.updates.cta.href}
+                className="group flex h-[51px] shrink-0 items-center justify-center gap-md self-start bg-bg-dark px-2xl text-md font-medium text-white md:self-auto"
+              >
+                {footer.updates.cta.label}
+                <CornerMark variant="bare" dark />
+              </Link>
+            </div>
             <ActionTile href={footer.cta.href} title={footer.cta.label} className="min-h-[120px] md:w-[236px]" />
           </div>
 

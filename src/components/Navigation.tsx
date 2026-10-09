@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { nav, type NavMenu } from "@/content/site";
+import { Cancel01Icon, Menu01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Icon } from "./icons";
+import { CornerMark } from "./ui";
 import { Logo } from "./Logo";
 
 const linkClass = "text-[15px] font-medium leading-[21px] tracking-[-0.3px] text-white";
@@ -40,7 +43,7 @@ function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void
         className="group relative min-h-[348px] min-w-px max-w-[420px] flex-[420_0_0] overflow-clip"
       >
         <Image
-          src={nav.cardImage}
+          src={menu.card.image}
           alt=""
           fill
           sizes="420px"
@@ -50,11 +53,7 @@ function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void
           <span className="text-display-xs leading-[28.8px] tracking-[-0.96px] text-white">{menu.card.title}</span>
           <span className="max-w-[372px] text-sm leading-[19.6px] text-text-muted">{menu.card.body}</span>
         </span>
-        {/* Corner square: on hover the dark mark slides out and a new one slides in */}
-        <span className="absolute right-0 top-0 size-[52px] overflow-clip bg-white">
-          <span className="absolute left-[16px] top-[16px] size-[20px] bg-bg-dark transition-transform duration-500 ease-out group-hover:translate-x-[40px] group-hover:-translate-y-[40px]" />
-          <span className="absolute left-[-24px] top-[56px] size-[20px] bg-bg-dark transition-transform duration-500 ease-out group-hover:translate-x-[40px] group-hover:-translate-y-[40px]" />
-        </span>
+        <CornerMark />
       </Link>
     </div>
   );
@@ -63,6 +62,7 @@ function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void
 export function Navigation() {
   const [open, setOpen] = useState<string | null>(null);
   const [shown, setShown] = useState<NavMenu>(nav.menus[0]);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   // Click-opened menus stay open until click, Escape or outside click; hover-opened ones close on leave.
   const openedBy = useRef<"hover" | "click">("hover");
@@ -85,7 +85,11 @@ export function Navigation() {
   };
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(null);
+      setMobileOpen(false);
+    };
     const onClick = (e: MouseEvent) => {
       if (!headerRef.current?.contains(e.target as Node)) setOpen(null);
     };
@@ -96,6 +100,13 @@ export function Navigation() {
       window.removeEventListener("click", onClick);
     };
   }, []);
+
+  useEffect(() => {
+    document.documentElement.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
     <header ref={headerRef} onMouseLeave={hoverClose} className="absolute inset-x-0 top-0 z-20 flex justify-center">
@@ -147,10 +158,20 @@ export function Navigation() {
             </Link>
             <Link
               href={nav.cta.href}
-              className="flex h-[50px] items-center justify-center whitespace-nowrap border border-line px-2xl py-[14px] text-md font-medium leading-[22.4px] text-white transition-colors hover:bg-white/5"
+              className="hidden h-[50px] items-center justify-center whitespace-nowrap border border-line px-2xl py-[14px] text-md font-medium leading-[22.4px] text-white transition-colors hover:bg-white/5 sm:flex"
             >
               {nav.cta.label}
             </Link>
+            <button
+              type="button"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMobileOpen((v) => !v)}
+              className="flex size-[50px] items-center justify-center border border-line text-white lg:hidden"
+            >
+              <HugeiconsIcon icon={mobileOpen ? Cancel01Icon : Menu01Icon} size={22} color="currentColor" strokeWidth={1.6} />
+            </button>
           </div>
         </div>
         <div className="absolute inset-x-2xl top-[84.8px] h-px bg-line" />
@@ -164,6 +185,50 @@ export function Navigation() {
           <MenuPanel menu={shown} onNavigate={() => setOpen(null)} />
         </div>
       </nav>
+
+      {/* Mobile / tablet menu */}
+      <div
+        id="mobile-menu"
+        className={`fixed inset-x-0 bottom-0 top-[86px] z-20 overflow-y-auto bg-bg-dark px-2xl pb-[40px] transition-opacity duration-300 lg:hidden ${
+          mobileOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <div className="mx-auto flex max-w-[640px] flex-col">
+          {nav.menus.map((menu) => (
+            <div key={menu.label} className="border-b border-line py-3xl">
+              <p className="mb-xl text-xs font-semibold uppercase leading-[16.8px] tracking-[0.72px] text-text-muted">{menu.label}</p>
+              <ul className="flex flex-col gap-xl">
+                {menu.items.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-lg text-white">
+                      <span className="flex size-[36px] shrink-0 items-center justify-center bg-white/8">
+                        <Icon name={item.icon} size={20} />
+                      </span>
+                      <span className="text-lg leading-[24px]">{item.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <ul className="flex flex-col gap-xl border-b border-line py-3xl">
+            {[...nav.links, { label: "Platform Overview", href: "/platform" }, nav.signIn].map((l) => (
+              <li key={l.label}>
+                <Link href={l.href} onClick={() => setMobileOpen(false)} className="text-lg leading-[24px] text-white">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href={nav.cta.href}
+            onClick={() => setMobileOpen(false)}
+            className="mt-3xl flex h-[50px] items-center justify-center bg-white text-md font-medium text-bg-dark"
+          >
+            {nav.cta.label}
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }
